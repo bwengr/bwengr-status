@@ -5,6 +5,9 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -16,21 +19,11 @@ jobs:
         run: |
           mkdir -p src/data
 
-          # Function to check sites
           check_url() {
             local url=$1
             curl -s -o /dev/null -w "%{http_code}|%{url_effective}" --max-time 10 -L "$url" 2>/dev/null
           }
 
-          # Check each site (follows redirects)
-          BWENGR=$(check_url "https://bwengr.com")
-          DRAINAGE=$(check_url "https://drainageplans.la")
-          GRADING=$(check_url "https://gradingplans.la")
-          CIVIL=$(check_url "https://civilengineer.la")
-          BWENG=$(check_url "https://bw.engineering")
-          LAENG=$(check_url "https://losangeles.engineering")
-
-          # Function to determine status
           get_status() {
             local code=$1
             if [[ "$code" == "200" ]]; then
@@ -40,16 +33,19 @@ jobs:
             fi
           }
 
+          BWENGR=$(check_url "https://bwengr.com")
+          DRAINAGE=$(check_url "https://drainageplans.la")
+          GRADING=$(check_url "https://gradingplans.la")
+          CIVIL=$(check_url "https://civilengineer.la")
+          BWENG=$(check_url "https://bw.engineering")
+          LAENG=$(check_url "https://losangeles.engineering")
+
           BWENGR_STATUS=$(get_status $(echo $BWENGR | cut -d'|' -f1))
           DRAINAGE_STATUS=$(get_status $(echo $DRAINAGE | cut -d'|' -f1))
           GRADING_STATUS=$(get_status $(echo $GRADING | cut -d'|' -f1))
           CIVIL_STATUS=$(get_status $(echo $CIVIL | cut -d'|' -f1))
           BWENG_STATUS=$(get_status $(echo $BWENG | cut -d'|' -f1))
           LAENG_STATUS=$(get_status $(echo $LAENG | cut -d'|' -f1))
-
-          # Get redirect final code for logging
-          DRAINAGE_FINAL=$(echo $DRAINAGE | cut -d'|' -f2)
-          GRADING_FINAL=$(echo $GRADING | cut -d'|' -f2)
 
           echo "bwengr=$BWENGR_STATUS" >> $GITHUB_OUTPUT
           echo "drainage=$DRAINAGE_STATUS" >> $GITHUB_OUTPUT
@@ -58,7 +54,6 @@ jobs:
           echo "bweng=$BWENG_STATUS" >> $GITHUB_OUTPUT
           echo "laeng=$LAENG_STATUS" >> $GITHUB_OUTPUT
 
-          # Debug: log results
           echo "bwengr: $BWENGR"
           echo "drainage: $DRAINAGE"
           echo "grading: $GRADING"
@@ -66,17 +61,16 @@ jobs:
           echo "bweng: $BWENG"
           echo "laeng: $LAENG"
 
-          # Create status.json
-          cat > src/data/status.json << JSONEOF
+          cat > src/data/status.json << 'JSONEOF'
           {
-            "lastChecked": "$(date -Iseconds)",
-            "lastUpdated": "$(date -Iseconds)",
+            "lastChecked": "'$(date -Iseconds)'",
+            "lastUpdated": "'$(date -Iseconds)'",
             "services": [
               {
                 "name": "bwengr.com",
                 "url": "https://bwengr.com",
                 "description": "Main website and portfolio",
-                "status": "$BWENGR_STATUS",
+                "status": "'$BWENGR_STATUS'",
                 "responseTime": 0,
                 "uptime30d": 99.9,
                 "httpCode": 200
@@ -85,7 +79,7 @@ jobs:
                 "name": "drainageplans.la",
                 "url": "https://drainageplans.la",
                 "description": "Altadena fire rebuild drainage plan landing page",
-                "status": "$DRAINAGE_STATUS",
+                "status": "'$DRAINAGE_STATUS'",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -94,7 +88,7 @@ jobs:
                 "name": "gradingplans.la",
                 "url": "https://gradingplans.la",
                 "description": "Los Angeles grading plans landing page",
-                "status": "$GRADING_STATUS",
+                "status": "'$GRADING_STATUS'",
                 "responseTime": 0,
                 "uptime30d": 99.8,
                 "httpCode": 200
@@ -103,7 +97,7 @@ jobs:
                 "name": "civilengineer.la",
                 "url": "https://civilengineer.la",
                 "description": "Civil engineer LA redirect service",
-                "status": "$CIVIL_STATUS",
+                "status": "'$CIVIL_STATUS'",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -112,7 +106,7 @@ jobs:
                 "name": "bw.engineering",
                 "url": "https://bw.engineering",
                 "description": "B+W Engineering short URL",
-                "status": "$BWENG_STATUS",
+                "status": "'$BWENG_STATUS'",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -121,7 +115,7 @@ jobs:
                 "name": "losangeles.engineering",
                 "url": "https://losangeles.engineering",
                 "description": "Los Angeles engineering redirect",
-                "status": "$LAENG_STATUS",
+                "status": "'$LAENG_STATUS'",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -131,7 +125,7 @@ jobs:
           }
           JSONEOF
 
-- name: Commit status update
+      - name: Commit status update
         run: |
           git add -A
           if ! git diff --cached --quiet --exit-code; then
