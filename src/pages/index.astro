@@ -1,44 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const statusData = {
-  lastUpdated: new Date().toISOString(),
-  services: [
-    {
-      name: "bwengr.com",
-      url: "https://bwengr.com",
-      description: "Main website and portfolio",
-      status: "operational",
-      uptime30d: 99.9,
-      responseTime: 45
-    },
-    {
-      name: "drainageplans.la",
-      url: "https://drainageplans.la",
-      description: "Altadena fire rebuild drainage plan landing page",
-      status: "operational",
-      uptime30d: 100,
-      responseTime: 38
-    },
-    {
-      name: "gradingplans.la",
-      url: "https://gradingplans.la",
-      description: "Los Angeles grading plans landing page",
-      status: "operational",
-      uptime30d: 99.8,
-      responseTime: 42
-    },
-    {
-      name: "civilengineer.la",
-      url: "https://civilengineer.la",
-      description: "Civil engineer LA redirect service",
-      status: "operational",
-      uptime30d: 100,
-      responseTime: 12
-    }
-  ],
-  incidents: []
-};
+import statusData from '../data/status.json';
 
 const schema = {
   "@context": "https://schema.org",
@@ -66,6 +28,8 @@ function getStatusColor(status: string) {
     default: return "#6b7280";
   }
 }
+
+const allOperational = statusData.services.every(s => s.status === "operational");
 ---
 
 <Layout title="B+W Engineering System Status" description="Real-time infrastructure status for B+W Engineering web services. Monitor availability of bwengr.com, drainageplans.la, gradingplans.la, and civilengineer.la.">
@@ -79,7 +43,12 @@ function getStatusColor(status: string) {
       <h1>B+W Engineering Status</h1>
       <p class="subtitle">Real-time infrastructure status for our web services. Monitor availability and performance across all B+W Engineering platforms.</p>
       <p class="last-updated">
-        Last updated: <time>{new Date(statusData.lastUpdated).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PST</time>
+        <span class="live-dot"></span>
+        Checks every 5 minutes via GitHub Actions
+        <br />
+        <time datetime={statusData.lastChecked || statusData.lastUpdated}>
+          Last checked: {new Date(statusData.lastChecked || statusData.lastUpdated).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PST
+        </time>
       </p>
     </header>
 
@@ -120,12 +89,12 @@ function getStatusColor(status: string) {
         <div class="infra-item">
           <div class="infra-icon" style="color: #3b82f6">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
           <div>
-            <p class="infra-title">Cloudflare Pages</p>
-            <p class="infra-desc">Edge deployment, Los Angeles region</p>
+            <p class="infra-title">GitHub Actions</p>
+            <p class="infra-desc">Monitors every 5 minutes</p>
           </div>
         </div>
         <div class="infra-item">
@@ -135,19 +104,19 @@ function getStatusColor(status: string) {
             </svg>
           </div>
           <div>
-            <p class="infra-title">DDoS Protection</p>
-            <p class="infra-desc">Cloudflare built-in security</p>
+            <p class="infra-title">Cloudflare Pages</p>
+            <p class="infra-desc">Edge deployment, LA region</p>
           </div>
         </div>
         <div class="infra-item">
           <div class="infra-icon" style="color: #a855f7">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
             </svg>
           </div>
           <div>
-            <p class="infra-title">Global Edge Network</p>
-            <p class="infra-desc">200+ cities, sub-100ms response</p>
+            <p class="infra-title">GitHub Repository</p>
+            <p class="infra-desc">Open source status data</p>
           </div>
         </div>
         <div class="infra-item">
@@ -157,8 +126,8 @@ function getStatusColor(status: string) {
             </svg>
           </div>
           <div>
-            <p class="infra-title">24/7 Monitoring</p>
-            <p class="infra-desc">Automated uptime checks every 60s</p>
+            <p class="infra-title">5-Minute Intervals</p>
+            <p class="infra-desc">288 checks per day</p>
           </div>
         </div>
       </div>
@@ -231,6 +200,22 @@ function getStatusColor(status: string) {
   .last-updated {
     font-size: 0.75rem;
     color: #6b7280;
+    line-height: 1.8;
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 6px;
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
   }
 
   .services-grid {
