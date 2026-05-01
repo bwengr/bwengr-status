@@ -44,7 +44,7 @@ jobs:
           CIVIL=$(check_url "https://civilengineer.la")
           BWENG=$(check_url "https://bw.engineering")
           LAENG=$(check_url "https://losangeles.engineering")
-
+          API=$(check_url "https://api.bwengr.com/search")
           BWENGR_CODE=$(echo $BWENGR | cut -d'|' -f1)
           BWENGR_TIME=$(echo $BWENGR | cut -d'|' -f2)
           DRAINAGE_CODE=$(echo $DRAINAGE | cut -d'|' -f1)
@@ -57,6 +57,8 @@ jobs:
           BWENG_TIME=$(echo $BWENG | cut -d'|' -f2)
           LAENG_CODE=$(echo $LAENG | cut -d'|' -f1)
           LAENG_TIME=$(echo $LAENG | cut -d'|' -f2)
+          API_CODE=$(echo $API | cut -d'|' -f1)
+          API_TIME=$(echo $API | cut -d'|' -f2)
 
           BWENGR_STATUS=$(get_status $BWENGR_CODE)
           DRAINAGE_STATUS=$(get_status $DRAINAGE_CODE)
@@ -64,6 +66,7 @@ jobs:
           CIVIL_STATUS=$(get_status $CIVIL_CODE)
           BWENG_STATUS=$(get_status $BWENG_CODE)
           LAENG_STATUS=$(get_status $LAENG_CODE)
+          API_STATUS=$(get_status $API_CODE)
 
           echo "bwengr_status=$BWENGR_STATUS" >> $GITHUB_OUTPUT
           echo "bwengr_time=$BWENGR_TIME" >> $GITHUB_OUTPUT
@@ -110,6 +113,7 @@ jobs:
           add_check "civilengineer.la" "$CIVIL_STATUS" "$CIVIL_TIME" "$CIVIL_CODE"
           add_check "bw.engineering" "$BWENG_STATUS" "$BWENG_TIME" "$BWENG_CODE"
           add_check "losangeles.engineering" "$LAENG_STATUS" "$LAENG_TIME" "$LAENG_CODE"
+          add_check "api.bwengr.com" "$API_STATUS" "$API_TIME" "$API_CODE"
 
           THIRTY_DAYS_AGO=$(date -d "30 days ago" -Iseconds)
           CHECKS=$(echo "$CHECKS" | jq --arg t "$THIRTY_DAYS_AGO" 'map(select(.timestamp >= $t))')
@@ -145,6 +149,7 @@ jobs:
           UP_civil=$(calculate_uptime "civilengineer.la")
           UP_bweng=$(calculate_uptime "bw.engineering")
           UP_laeng=$(calculate_uptime "losangeles.engineering")
+          UP_api=$(calculate_uptime "api.bwengr.com")
 
           RT_bwengr=$(calculate_avg_response "bwengr.com")
           RT_drainage=$(calculate_avg_response "drainageplans.la")
@@ -152,6 +157,7 @@ jobs:
           RT_civil=$(calculate_avg_response "civilengineer.la")
           RT_bweng=$(calculate_avg_response "bw.engineering")
           RT_laeng=$(calculate_avg_response "losangeles.engineering")
+          RT_api=$(calculate_avg_response "api.bwengr.com")
 
           echo "bwengr uptime=$UP_bwengr response=$RT_bwengr"
           echo "drainage uptime=$UP_drainage response=$RT_drainage"
@@ -159,6 +165,7 @@ jobs:
           echo "civil uptime=$UP_civil response=$RT_civil"
           echo "bweng uptime=$UP_bweng response=$RT_bweng"
           echo "laeng uptime=$UP_laeng response=$RT_laeng"
+          echo "api uptime=$UP_api response=$RT_api"
 
           cat > src/data/status.json << JSONEOF
           {
@@ -218,6 +225,15 @@ jobs:
                 "responseTime": $RT_laeng,
                 "uptime30d": $UP_laeng,
                 "httpCode": $LAENG_CODE
+              },
+              {
+                "name": "api.bwengr.com",
+                "url": "https://api.bwengr.com/search",
+                "description": "AI search API for B+W Engineering",
+                "status": "$API_STATUS",
+                "responseTime": $RT_api,
+                "uptime30d": $UP_api,
+                "httpCode": $API_CODE
               }
             ],
             "incidents": []
