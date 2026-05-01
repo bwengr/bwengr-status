@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-05-01T20:10:42+00:00",
-  "lastUpdated": "2026-05-01T20:10:42+00:00",
+  "lastChecked": "2026-05-01T20:15:37+00:00",
+  "lastUpdated": "2026-05-01T20:15:37+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 373,
+      "responseTime": 371,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 190,
+      "responseTime": 191,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 179,
+      "responseTime": 180,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 532,
+      "responseTime": 528,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 234,
+      "responseTime": 235,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 297,
+      "responseTime": 296,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -61,7 +61,7 @@
       "url": "https://api.bwengr.com/health",
       "description": "AI search API for B+W Engineering",
       "status": "operational",
-      "responseTime": 116,
+      "responseTime": 117,
       "uptime30d": 79.00,
       "httpCode": 200
     }
