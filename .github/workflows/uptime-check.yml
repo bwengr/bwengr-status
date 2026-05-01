@@ -32,7 +32,7 @@ jobs:
           check_api() {
             local url=$1
             local result
-            result=$(curl -s -o /dev/null -w "%{http_code}|%{time_total}" --max-time 30 -X POST "$url" -H "Content-Type: application/json" -d '{"query":"test"}' 2>/dev/null)
+            result=$(curl -s -o /dev/null -w "%{http_code}|%{time_total}" --max-time 30 "$url" 2>/dev/null)
             echo "$result"
           }
 
@@ -51,7 +51,7 @@ jobs:
           CIVIL=$(check_url "https://civilengineer.la")
           BWENG=$(check_url "https://bw.engineering")
           LAENG=$(check_url "https://losangeles.engineering")
-          API=$(check_api "https://api.bwengr.com/search")
+          API=$(check_api "https://api.bwengr.com/health")
           BWENGR_CODE=$(echo $BWENGR | cut -d'|' -f1)
           BWENGR_TIME=$(echo $BWENGR | cut -d'|' -f2)
           DRAINAGE_CODE=$(echo $DRAINAGE | cut -d'|' -f1)
