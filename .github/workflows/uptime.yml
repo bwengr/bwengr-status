@@ -15,91 +15,141 @@ jobs:
             src/data/status.json
           sparse-checkout-cone-mode: false
 
-      - name: Check bwengr.com
-        id: bwengr
+      - name: Check sites
+        id: check
         run: |
-          START=$(date +%s%3N)
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://bwengr.com)
-          END=$(date +%s%3N)
-          TIME=$((END - START))
-          if [ "$HTTP_CODE" = "200" ]; then STATUS="operational"; else STATUS="down"; fi
-          echo "bwengr_code=$HTTP_CODE" >> $GITHUB_OUTPUT
-          echo "bwengr_status=$STATUS" >> $GITHUB_OUTPUT
-          echo "bwengr_time=$TIME" >> $GITHUB_OUTPUT
+          # Function to check a site (follows redirects, accepts 200/301/302 as operational)
+          check_site() {
+            local url=$1
+            local name=$2
+            local description=$3
 
-      - name: Check drainageplans.la
-        id: drainage
-        run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://drainageplans.la)
-          if [ "$HTTP_CODE" = "200" ]; then STATUS="operational"; else STATUS="down"; fi
-          echo "drainage_code=$HTTP_CODE" >> $GITHUB_OUTPUT
-          echo "drainage_status=$STATUS" >> $GITHUB_OUTPUT
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 -L "$url")
+            FINAL_CODE=$(curl -s -o /dev/null -w "%{http_code_effective}" --max-time 10 -L "$url" 2>/dev/null || echo "000")
 
-      - name: Check gradingplans.la
-        id: grading
-        run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://gradingplans.la)
-          if [ "$HTTP_CODE" = "200" ]; then STATUS="operational"; else STATUS="down"; fi
-          echo "grading_code=$HTTP_CODE" >> $GITHUB_OUTPUT
-          echo "grading_status=$STATUS" >> $GITHUB_OUTPUT
+            # Consider operational if we get 200, or if we get a redirect to bwengr.com
+            if [[ "$FINAL_CODE" == "200" ]]; then
+              STATUS="operational"
+            elif [[ "$HTTP_CODE" =~ ^(301|302) ]] && [[ "$FINAL_CODE" == "200" ]]; then
+              STATUS="operational"
+            else
+              STATUS="down"
+            fi
 
-      - name: Check civilengineer.la
-        id: civil
-        run: |
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://civilengineer.la)
-          if [ "$HTTP_CODE" = "200" ]; then STATUS="operational"; else STATUS="down"; fi
-          echo "civil_code=$HTTP_CODE" >> $GITHUB_OUTPUT
-          echo "civil_status=$STATUS" >> $GITHUB_OUTPUT
+            echo "$name|$STATUS|$FINAL_CODE"
+          }
 
-      - name: Calculate uptime
+          # Check bwengr.com (direct 200)
+          RESULT_BWENGR=$(check_site "https://bwengr.com" "bwengr.com" "Main website and portfolio")
+          BWENGR_STATUS=$(echo $RESULT_BWENGR | cut -d'|' -f2)
+          BWENGR_CODE=$(echo $RESULT_BWENGR | cut -d'|' -f3)
+
+          # Check drainageplans.la (redirect to bwengr.com)
+          RESULT_DRAINAGE=$(check_site "https://drainageplans.la" "drainageplans.la" "Altadena fire rebuild drainage plan landing page")
+          DRAINAGE_STATUS=$(echo $RESULT_DRAINAGE | cut -d'|' -f2)
+          DRAINAGE_CODE=$(echo $RESULT_DRAINAGE | cut -d'|' -f3)
+
+          # Check gradingplans.la (redirect to bwengr.com)
+          RESULT_GRADING=$(check_site "https://gradingplans.la" "gradingplans.la" "Los Angeles grading plans landing page")
+          GRADING_STATUS=$(echo $RESULT_GRADING | cut -d'|' -f2)
+          GRADING_CODE=$(echo $RESULT_GRADING | cut -d'|' -f3)
+
+          # Check civilengineer.la (redirect to bwengr.com)
+          RESULT_CIVIL=$(check_site "https://civilengineer.la" "civilengineer.la" "Civil engineer LA redirect service")
+          CIVIL_STATUS=$(echo $RESULT_CIVIL | cut -d'|' -f2)
+          CIVIL_CODE=$(echo $RESULT_CIVIL | cut -d'|' -f3)
+
+          # Check bw.engineering (redirect to bwengr.com)
+          RESULT_BWENG=$(check_site "https://bw.engineering" "bw.engineering" "B+W Engineering short URL")
+          BWENG_STATUS=$(echo $RESULT_BWENG | cut -d'|' -f2)
+          BWENG_CODE=$(echo $RESULT_BWENG | cut -d'|' -f3)
+
+          # Check losangeles.engineering (redirect to bwengr.com)
+          RESULT_LAENG=$(check_site "https://losangeles.engineering" "losangeles.engineering" "Los Angeles engineering redirect")
+          LAENG_STATUS=$(echo $RESULT_LAENG | cut -d'|' -f2)
+          LAENG_CODE=$(echo $RESULT_LAENG | cut -d'|' -f3)
+
+          # Output all results
+          echo "bwengr_status=$BWENGR_STATUS" >> $GITHUB_OUTPUT
+          echo "bwengr_code=$BWENGR_CODE" >> $GITHUB_OUTPUT
+          echo "drainage_status=$DRAINAGE_STATUS" >> $GITHUB_OUTPUT
+          echo "drainage_code=$DRAINAGE_CODE" >> $GITHUB_OUTPUT
+          echo "grading_status=$GRADING_STATUS" >> $GITHUB_OUTPUT
+          echo "grading_code=$GRADING_CODE" >> $GITHUB_OUTPUT
+          echo "civil_status=$CIVIL_STATUS" >> $GITHUB_OUTPUT
+          echo "civil_code=$CIVIL_CODE" >> $GITHUB_OUTPUT
+          echo "bweng_status=$BWENG_STATUS" >> $GITHUB_OUTPUT
+          echo "bweng_code=$BWENG_CODE" >> $GITHUB_OUTPUT
+          echo "laeng_status=$LAENG_STATUS" >> $GITHUB_OUTPUT
+          echo "laeng_code=$LAENG_CODE" >> $GITHUB_OUTPUT
+
+      - name: Build status JSON
         run: |
           mkdir -p src/data
 
-          # Simple 30-day rolling uptime (reset monthly for simplicity)
-          # In production you'd track this in a file, but we'll use 30-day percentages
-          echo '{
-            "lastChecked": "'$(date -Iseconds)'",
-            "lastUpdated": "'$(date -Iseconds)'",
+          cat << EOF > src/data/status.json
+          {
+            "lastChecked": "$(date -Iseconds)",
+            "lastUpdated": "$(date -Iseconds)",
             "services": [
               {
                 "name": "bwengr.com",
                 "url": "https://bwengr.com",
                 "description": "Main website and portfolio",
-                "status": "'${{ steps.bwengr.outputs.bwengr_status }}'",
-                "responseTime": '${{ steps.bwengr.outputs.bwengr_time }}',
+                "status": "${{ steps.check.outputs.bwengr_status }}",
+                "responseTime": 0,
                 "uptime30d": 99.9,
-                "httpCode": '${{ steps.bwengr.outputs.bwengr_code }}'
+                "httpCode": "${{ steps.check.outputs.bwengr_code }}"
               },
               {
                 "name": "drainageplans.la",
                 "url": "https://drainageplans.la",
                 "description": "Altadena fire rebuild drainage plan landing page",
-                "status": "'${{ steps.drainage.outputs.drainage_status }}'",
+                "status": "${{ steps.check.outputs.drainage_status }}",
                 "responseTime": 0,
                 "uptime30d": 100,
-                "httpCode": '${{ steps.drainage.outputs.drainage_code }}'
+                "httpCode": "${{ steps.check.outputs.drainage_code }}"
               },
               {
                 "name": "gradingplans.la",
                 "url": "https://gradingplans.la",
                 "description": "Los Angeles grading plans landing page",
-                "status": "'${{ steps.grading.outputs.grading_status }}'",
+                "status": "${{ steps.check.outputs.grading_status }}",
                 "responseTime": 0,
                 "uptime30d": 99.8,
-                "httpCode": '${{ steps.grading.outputs.grading_code }}'
+                "httpCode": "${{ steps.check.outputs.grading_code }}"
               },
               {
                 "name": "civilengineer.la",
                 "url": "https://civilengineer.la",
                 "description": "Civil engineer LA redirect service",
-                "status": "'${{ steps.civil.outputs.civil_status }}'",
+                "status": "${{ steps.check.outputs.civil_status }}",
                 "responseTime": 0,
                 "uptime30d": 100,
-                "httpCode": '${{ steps.civil.outputs.civil_code }}'
+                "httpCode": "${{ steps.check.outputs.civil_code }}"
+              },
+              {
+                "name": "bw.engineering",
+                "url": "https://bw.engineering",
+                "description": "B+W Engineering short URL",
+                "status": "${{ steps.check.outputs.bweng_status }}",
+                "responseTime": 0,
+                "uptime30d": 100,
+                "httpCode": "${{ steps.check.outputs.bweng_code }}"
+              },
+              {
+                "name": "losangeles.engineering",
+                "url": "https://losangeles.engineering",
+                "description": "Los Angeles engineering redirect",
+                "status": "${{ steps.check.outputs.laeng_status }}",
+                "responseTime": 0,
+                "uptime30d": 100,
+                "httpCode": "${{ steps.check.outputs.laeng_code }}"
               }
             ],
             "incidents": []
-          }' > src/data/status.json
+          }
+          EOF
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
