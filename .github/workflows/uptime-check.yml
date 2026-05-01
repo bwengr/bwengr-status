@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
   check:
@@ -132,7 +132,10 @@ jobs:
           calculate_avg_response() {
             local service=$1
             local avg
-            avg=$(echo "$CHECKS" | jq --arg s "$service" --argjson cd 200 '[.[] | select(.service == $s and .httpCode == $cd)] | if length > 0 then (map(.responseTime) | add) / length else 0 end' 2>/dev/null || echo "0")
+            local filter_code=200
+            avg=$(echo "$CHECKS" | jq --arg s "$service" --argjson cd "$filter_code" \
+              '[.[] | select(.service == $s and .httpCode == $cd)] | if length > 0 then (map(.responseTime) | add) / length else 0 end' \
+              2>/dev/null || echo "0")
             echo "${avg%.*}"
           }
 

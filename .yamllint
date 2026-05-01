@@ -3,7 +3,10 @@ extends:
 
 rules:
   line-length:
-    max: 200
-    allow-non-breakable-inline-mappings: true
+    max: 250
+  truthy:
+    allowed-values:
+      - 'true'
+      - 'false'
   new-line-at-end-of-file: disable
   document-start: disable
