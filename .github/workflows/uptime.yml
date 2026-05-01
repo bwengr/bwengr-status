@@ -61,16 +61,16 @@ jobs:
           echo "bweng: $BWENG"
           echo "laeng: $LAENG"
 
-          cat > src/data/status.json << 'JSONEOF'
+          cat > src/data/status.json << JSONEOF
           {
-            "lastChecked": "'$(date -Iseconds)'",
-            "lastUpdated": "'$(date -Iseconds)'",
+            "lastChecked": "$(date -Iseconds)",
+            "lastUpdated": "$(date -Iseconds)",
             "services": [
               {
                 "name": "bwengr.com",
                 "url": "https://bwengr.com",
                 "description": "Main website and portfolio",
-                "status": "'$BWENGR_STATUS'",
+                "status": "$BWENGR_STATUS",
                 "responseTime": 0,
                 "uptime30d": 99.9,
                 "httpCode": 200
@@ -79,7 +79,7 @@ jobs:
                 "name": "drainageplans.la",
                 "url": "https://drainageplans.la",
                 "description": "Altadena fire rebuild drainage plan landing page",
-                "status": "'$DRAINAGE_STATUS'",
+                "status": "$DRAINAGE_STATUS",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -88,7 +88,7 @@ jobs:
                 "name": "gradingplans.la",
                 "url": "https://gradingplans.la",
                 "description": "Los Angeles grading plans landing page",
-                "status": "'$GRADING_STATUS'",
+                "status": "$GRADING_STATUS",
                 "responseTime": 0,
                 "uptime30d": 99.8,
                 "httpCode": 200
@@ -97,7 +97,7 @@ jobs:
                 "name": "civilengineer.la",
                 "url": "https://civilengineer.la",
                 "description": "Civil engineer LA redirect service",
-                "status": "'$CIVIL_STATUS'",
+                "status": "$CIVIL_STATUS",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -106,7 +106,7 @@ jobs:
                 "name": "bw.engineering",
                 "url": "https://bw.engineering",
                 "description": "B+W Engineering short URL",
-                "status": "'$BWENG_STATUS'",
+                "status": "$BWENG_STATUS",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
@@ -115,7 +115,7 @@ jobs:
                 "name": "losangeles.engineering",
                 "url": "https://losangeles.engineering",
                 "description": "Los Angeles engineering redirect",
-                "status": "'$LAENG_STATUS'",
+                "status": "$LAENG_STATUS",
                 "responseTime": 0,
                 "uptime30d": 100,
                 "httpCode": 200
