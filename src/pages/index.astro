@@ -44,9 +44,7 @@ const allOperational = statusData.services.every(s => s.status === "operational"
       <p class="subtitle">Real-time infrastructure status for our web services. Monitor availability and performance across all B+W Engineering platforms.</p>
       <p class="last-updated">
         <span class="live-dot"></span>
-        <a href="https://github.com/bwengr/bwengr-status/actions" target="_blank" rel="noopener" class="hover:underline">
-          Checks every 5 minutes via GitHub Actions
-        </a>
+        Checks every 5 minutes via <a href="https://github.com/bwengr/bwengr-status/actions" target="_blank" rel="noopener" class="hover:underline">GitHub Actions</a>
         <br />
         <time datetime={statusData.lastChecked || statusData.lastUpdated}>
           Last checked: {new Date(statusData.lastChecked || statusData.lastUpdated).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PST
