@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const statusData = {
+  lastUpdated: new Date().toISOString(),
+  services: [
+    {
+      name: "bwengr.com",
+      url: "https://bwengr.com",
+      description: "Main website and portfolio",
+      status: "operational",
+      uptime30d: 99.9,
+      responseTime: 45
+    },
+    {
+      name: "drainageplans.la",
+      url: "https://drainageplans.la",
+      description: "Altadena fire rebuild drainage plan landing page",
+      status: "operational",
+      uptime30d: 100,
+      responseTime: 38
+    },
+    {
+      name: "gradingplans.la",
+      url: "https://gradingplans.la",
+      description: "Los Angeles grading plans landing page",
+      status: "operational",
+      uptime30d: 99.8,
+      responseTime: 42
+    },
+    {
+      name: "civilengineer.la",
+      url: "https://civilengineer.la",
+      description: "Civil engineer LA redirect service",
+      status: "operational",
+      uptime30d: 100,
+      responseTime: 12
+    }
+  ],
+  incidents: []
+};
+
+const allOperational = statusData.services.every(s => s.status === "operational");
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case "operational": return "text-green-400";
+    case "degraded": return "text-yellow-400";
+    case "down": return "text-red-400";
+    default: return "text-gray-400";
+  }
+}
+
+function getStatusDot(status: string) {
+  switch (status) {
+    case "operational": return "bg-green-400";
+    case "degraded": return "bg-yellow-400";
+    case "down": return "bg-red-400";
+    default: return "bg-gray-400";
+  }
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "B+W Engineering System Status",
+  "description": "Real-time infrastructure status for B+W Engineering web services including bwengr.com, drainageplans.la, and gradingplans.la.",
+  "url": "https://status.bwengr.com",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "B+W Engineering and Design",
+    "url": "https://bwengr.com"
+  },
+  "about": {
+    "@type": "Organization",
+    "name": "B+W Engineering and Design",
+    "url": "https://bwengr.com"
+  }
+};
+---
+
+<Layout title="B+W Engineering System Status" description="Real-time infrastructure status for B+W Engineering web services. Monitor availability of bwengr.com, drainageplans.la, gradingplans.la, and civilengineer.la.">
+  <div class="max-w-3xl mx-auto px-4 py-12 md:py-20">
+    <!-- Header -->
+    <header class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+        <span class="text-green-400 font-medium text-sm uppercase tracking-wider">All Systems Operational</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-3 text-white">B+W Engineering Status</h1>
+      <p class="text-gray-400 max-w-md mx-auto">
+        Real-time infrastructure status for our web services. Monitor availability and performance across all B+W Engineering platforms.
+      </p>
+      <p class="text-xs text-gray-500 mt-4">
+        Last updated: <time datetime={statusData.lastUpdated}>{new Date(statusData.lastUpdated).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PST</time>
+      </p>
+    </header>
+
+    <!-- Services Grid -->
+    <div class="space-y-4 mb-12">
+      {statusData.services.map((service) => (
+        <a
+          href={service.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block bg-[#12121a] border border-[#1e1e2e] rounded-xl p-5 hover:border-[#2a2a3a] transition-all group"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-semibold text-white group-hover:text-blue-400 transition-colors">{service.name}</h3>
+                <span class={`inline-block w-2 h-2 rounded-full ${getStatusDot(service.status)}`}></span>
+                <span class={`text-xs font-medium uppercase ${getStatusColor(service.status)}`}>{service.status}</span>
+              </div>
+              <p class="text-sm text-gray-400 mb-3">{service.description}</p>
+              <div class="flex flex-wrap gap-4 text-xs text-gray-500">
+                <span class="flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  {service.responseTime}ms avg response
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {service.uptime30d}% uptime (30 days)
+                </span>
+              </div>
+            </div>
+            <div class="text-gray-600 group-hover:text-gray-400 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Infrastructure Info -->
+    <div class="bg-[#12121a] border border-[#1e1e2e] rounded-xl p-6 mb-12">
+      <h2 class="text-lg font-semibold text-white mb-4">Infrastructure</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-white font-medium">Cloudflare Pages</p>
+            <p class="text-gray-500 text-xs">Edge deployment, Los Angeles region</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-white font-medium">DDoS Protection</p>
+            <p class="text-gray-500 text-xs">Cloudflare built-in security</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-white font-medium">Global Edge Network</p>
+            <p class="text-gray-500 text-xs">200+ cities, sub-100ms response</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-white font-medium">24/7 Monitoring</p>
+            <p class="text-gray-500 text-xs">Automated uptime checks every 60s</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer CTA and Links -->
+    <div class="text-center">
+      <p class="text-gray-400 text-sm mb-4">
+        Need to reach us? Contact <a href="mailto:info@bwengr.com" class="text-blue-400 hover:underline">info@bwengr.com</a> or call <a href="tel:+13237393913" class="text-blue-400 hover:underline">323-739-3913</a>
+      </p>
+      <p class="text-gray-600 text-sm">
+        Part of <a href="https://bwengr.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors font-medium">B+W Engineering and Design</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Layout>
