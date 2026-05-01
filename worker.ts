@@ -1,5 +1,5 @@
 export default {
-  async scheduled(event, env, ctx) {
+  async scheduled(event: ScheduledEvent, env: { GITHUB_TOKEN: string }, _ctx: ExecutionContext) {
     const GITHUB_TOKEN = env.GITHUB_TOKEN;
     const OWNER = 'bwengr';
     const REPO = 'bwengr-status';
