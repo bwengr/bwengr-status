@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-05-01T17:05:31+00:00",
-  "lastUpdated": "2026-05-01T17:05:31+00:00",
+  "lastChecked": "2026-05-01T17:10:34+00:00",
+  "lastUpdated": "2026-05-01T17:10:34+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 236,
+      "responseTime": 232,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 197,
+      "responseTime": 195,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 165,
+      "responseTime": 168,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 473,
+      "responseTime": 470,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 230,
+      "responseTime": 227,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -52,13 +52,13 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 220,
+      "responseTime": 218,
       "uptime30d": 100.00,
       "httpCode": 200
     },
     {
       "name": "api.bwengr.com",
-      "url": "https://api.bwengr.com/search",
+      "url": "https://api.bwengr.com",
       "description": "AI search API for B+W Engineering",
       "status": "down",
       "responseTime": 0,
