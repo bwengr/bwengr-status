@@ -35,33 +35,21 @@ const schema = {
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#0a0a0f] text-white min-h-screen font-sans antialiased">
+  <body>
     <slot />
   </body>
 </html>
 
 <style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-  :root {
-    --green: #22c55e;
-    --yellow: #eab308;
-    --red: #ef4444;
-    --blue: #3b82f6;
-    --charcoal: #1a1a2e;
-    --light: #f8fafc;
-    --bw-accent: #3b82f6;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: #0a0a0f;
     color: #f8fafc;
+    min-height: 100vh;
+    line-height: 1.6;
   }
 </style>

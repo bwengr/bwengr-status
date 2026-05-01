@@ -40,26 +40,6 @@ const statusData = {
   incidents: []
 };
 
-const allOperational = statusData.services.every(s => s.status === "operational");
-
-function getStatusColor(status: string) {
-  switch (status) {
-    case "operational": return "text-green-400";
-    case "degraded": return "text-yellow-400";
-    case "down": return "text-red-400";
-    default: return "text-gray-400";
-  }
-}
-
-function getStatusDot(status: string) {
-  switch (status) {
-    case "operational": return "bg-green-400";
-    case "degraded": return "bg-yellow-400";
-    case "down": return "bg-red-400";
-    default: return "bg-gray-400";
-  }
-}
-
 const schema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
@@ -77,128 +57,347 @@ const schema = {
     "url": "https://bwengr.com"
   }
 };
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case "operational": return "#22c55e";
+    case "degraded": return "#eab308";
+    case "down": return "#ef4444";
+    default: return "#6b7280";
+  }
+}
 ---
 
 <Layout title="B+W Engineering System Status" description="Real-time infrastructure status for B+W Engineering web services. Monitor availability of bwengr.com, drainageplans.la, gradingplans.la, and civilengineer.la.">
-  <div class="max-w-3xl mx-auto px-4 py-12 md:py-20">
+  <div class="container">
     <!-- Header -->
-    <header class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 mb-4">
-        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
-        <span class="text-green-400 font-medium text-sm uppercase tracking-wider">All Systems Operational</span>
+    <header class="header">
+      <div class="status-badge">
+        <span class="dot"></span>
+        <span class="badge-text">All Systems Operational</span>
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold mb-3 text-white">B+W Engineering Status</h1>
-      <p class="text-gray-400 max-w-md mx-auto">
-        Real-time infrastructure status for our web services. Monitor availability and performance across all B+W Engineering platforms.
-      </p>
-      <p class="text-xs text-gray-500 mt-4">
-        Last updated: <time datetime={statusData.lastUpdated}>{new Date(statusData.lastUpdated).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PST</time>
+      <h1>B+W Engineering Status</h1>
+      <p class="subtitle">Real-time infrastructure status for our web services. Monitor availability and performance across all B+W Engineering platforms.</p>
+      <p class="last-updated">
+        Last updated: <time>{new Date(statusData.lastUpdated).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })} PST</time>
       </p>
     </header>
 
     <!-- Services Grid -->
-    <div class="space-y-4 mb-12">
+    <div class="services-grid">
       {statusData.services.map((service) => (
-        <a
-          href={service.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block bg-[#12121a] border border-[#1e1e2e] rounded-xl p-5 hover:border-[#2a2a3a] transition-all group"
-        >
-          <div class="flex items-start justify-between gap-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <h3 class="font-semibold text-white group-hover:text-blue-400 transition-colors">{service.name}</h3>
-                <span class={`inline-block w-2 h-2 rounded-full ${getStatusDot(service.status)}`}></span>
-                <span class={`text-xs font-medium uppercase ${getStatusColor(service.status)}`}>{service.status}</span>
-              </div>
-              <p class="text-sm text-gray-400 mb-3">{service.description}</p>
-              <div class="flex flex-wrap gap-4 text-xs text-gray-500">
-                <span class="flex items-center gap-1">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  {service.responseTime}ms avg response
-                </span>
-                <span class="flex items-center gap-1">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {service.uptime30d}% uptime (30 days)
-                </span>
-              </div>
+        <a href={service.url} target="_blank" rel="noopener noreferrer" class="service-card">
+          <div class="service-header">
+            <h3>{service.name}</h3>
+            <div class="service-status">
+              <span class="status-dot" style={`background: ${getStatusColor(service.status)}`}></span>
+              <span class="status-label" style={`color: ${getStatusColor(service.status)}`}>{service.status}</span>
             </div>
-            <div class="text-gray-600 group-hover:text-gray-400 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </div>
+          <p class="service-description">{service.description}</p>
+          <div class="service-metrics">
+            <span class="metric">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
-            </div>
+              {service.responseTime}ms avg response
+            </span>
+            <span class="metric">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              {service.uptime30d}% uptime (30 days)
+            </span>
           </div>
         </a>
       ))}
     </div>
 
     <!-- Infrastructure Info -->
-    <div class="bg-[#12121a] border border-[#1e1e2e] rounded-xl p-6 mb-12">
-      <h2 class="text-lg font-semibold text-white mb-4">Infrastructure</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <div class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+    <div class="infrastructure-section">
+      <h2>Infrastructure</h2>
+      <div class="infra-grid">
+        <div class="infra-item">
+          <div class="infra-icon" style="color: #3b82f6">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
             </svg>
           </div>
           <div>
-            <p class="text-white font-medium">Cloudflare Pages</p>
-            <p class="text-gray-500 text-xs">Edge deployment, Los Angeles region</p>
+            <p class="infra-title">Cloudflare Pages</p>
+            <p class="infra-desc">Edge deployment, Los Angeles region</p>
           </div>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <div class="infra-item">
+          <div class="infra-icon" style="color: #22c55e">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
           </div>
           <div>
-            <p class="text-white font-medium">DDoS Protection</p>
-            <p class="text-gray-500 text-xs">Cloudflare built-in security</p>
+            <p class="infra-title">DDoS Protection</p>
+            <p class="infra-desc">Cloudflare built-in security</p>
           </div>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <div class="infra-item">
+          <div class="infra-icon" style="color: #a855f7">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
           <div>
-            <p class="text-white font-medium">Global Edge Network</p>
-            <p class="text-gray-500 text-xs">200+ cities, sub-100ms response</p>
+            <p class="infra-title">Global Edge Network</p>
+            <p class="infra-desc">200+ cities, sub-100ms response</p>
           </div>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-[#1e1e2e] flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <div class="infra-item">
+          <div class="infra-icon" style="color: #eab308">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
           <div>
-            <p class="text-white font-medium">24/7 Monitoring</p>
-            <p class="text-gray-500 text-xs">Automated uptime checks every 60s</p>
+            <p class="infra-title">24/7 Monitoring</p>
+            <p class="infra-desc">Automated uptime checks every 60s</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Footer CTA and Links -->
-    <div class="text-center">
-      <p class="text-gray-400 text-sm mb-4">
-        Need to reach us? Contact <a href="mailto:info@bwengr.com" class="text-blue-400 hover:underline">info@bwengr.com</a> or call <a href="tel:+13237393913" class="text-blue-400 hover:underline">323-739-3913</a>
-      </p>
-      <p class="text-gray-600 text-sm">
-        Part of <a href="https://bwengr.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors font-medium">B+W Engineering and Design</a>
-      </p>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Need to reach us? Contact <a href="mailto:info@bwengr.com">info@bwengr.com</a> or call <a href="tel:+13237393913">323-739-3913</a></p>
+      <p>Part of <a href="https://bwengr.com" target="_blank" rel="noopener">B+W Engineering and Design</a></p>
+    </footer>
   </div>
 
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </Layout>
+
+<style>
+  .container {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .badge-text {
+    color: #22c55e;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    color: #9ca3af;
+    max-width: 28rem;
+    margin: 0 auto 1rem;
+    line-height: 1.6;
+  }
+
+  .last-updated {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .service-card {
+    display: block;
+    background: #12121a;
+    border: 1px solid #1e1e2e;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .service-card:hover {
+    border-color: #2a2a3a;
+  }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    transition: color 0.2s;
+  }
+
+  .service-card:hover h3 {
+    color: #3b82f6;
+  }
+
+  .service-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .service-description {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .metric svg {
+    flex-shrink: 0;
+  }
+
+  .infrastructure-section {
+    background: #12121a;
+    border: 1px solid #1e1e2e;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .infrastructure-section h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .infra-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .infra-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .infra-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .infra-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 0.5rem;
+    background: #1e1e2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .infra-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .infra-desc {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .footer {
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  .footer p:last-child {
+    color: #4b5563;
+  }
+
+  .footer p:last-child a {
+    color: #9ca3af;
+    font-weight: 500;
+  }
+
+  .footer p:last-child a:hover {
+    color: #fff;
+  }
+</style>
