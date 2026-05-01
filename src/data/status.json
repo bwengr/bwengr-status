@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-05-01T17:30:38+00:00",
-  "lastUpdated": "2026-05-01T17:30:38+00:00",
+  "lastChecked": "2026-05-01T17:35:39+00:00",
+  "lastUpdated": "2026-05-01T17:35:39+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 230,
+      "responseTime": 229,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 193,
+      "responseTime": 191,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 172,
+      "responseTime": 171,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 579,
+      "responseTime": 571,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 223,
+      "responseTime": 221,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 216,
+      "responseTime": 219,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -60,10 +60,10 @@
       "name": "api.bwengr.com",
       "url": "https://api.bwengr.com",
       "description": "AI search API for B+W Engineering",
-      "status": "down",
-      "responseTime": 0,
-      "uptime30d": 0,
-      "httpCode": 403
+      "status": "operational",
+      "responseTime": 146,
+      "uptime30d": 10.00,
+      "httpCode": 200
     }
   ],
   "incidents": []
