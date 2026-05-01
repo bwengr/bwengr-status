@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-05-01T13:40:33+00:00",
-  "lastUpdated": "2026-05-01T13:40:33+00:00",
+  "lastChecked": "2026-05-01T13:43:52+00:00",
+  "lastUpdated": "2026-05-01T13:43:52+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 292,
+      "responseTime": 267,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 178,
+      "responseTime": 174,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 164,
+      "responseTime": 168,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -33,17 +33,17 @@
       "name": "civilengineer.la",
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
-      "status": "down",
-      "responseTime": 0,
-      "uptime30d": 0,
-      "httpCode": 422
+      "status": "operational",
+      "responseTime": 313,
+      "uptime30d": 50.00,
+      "httpCode": 200
     },
     {
       "name": "bw.engineering",
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 224,
+      "responseTime": 223,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 215,
+      "responseTime": 413,
       "uptime30d": 100.00,
       "httpCode": 200
     }
