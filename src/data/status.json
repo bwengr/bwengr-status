@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-05-01T20:30:32+00:00",
-  "lastUpdated": "2026-05-01T20:30:32+00:00",
+  "lastChecked": "2026-05-01T20:31:26+00:00",
+  "lastUpdated": "2026-05-01T20:31:26+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 365,
+      "responseTime": 363,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 234,
+      "responseTime": 236,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 293,
+      "responseTime": 292,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -62,7 +62,7 @@
       "description": "AI search API for B+W Engineering",
       "status": "operational",
       "responseTime": 119,
-      "uptime30d": 80.00,
+      "uptime30d": 81.00,
       "httpCode": 200
     }
   ],
