@@ -1,14 +1,14 @@
 {
-  "lastChecked": "2026-05-01T13:33:22+00:00",
-  "lastUpdated": "2026-05-01T13:33:22+00:00",
+  "lastChecked": "2026-05-01T13:40:33+00:00",
+  "lastUpdated": "2026-05-01T13:40:33+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 0,
-      "uptime30d": 99.9,
+      "responseTime": 292,
+      "uptime30d": 100.00,
       "httpCode": 200
     },
     {
@@ -16,8 +16,8 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 0,
-      "uptime30d": 100,
+      "responseTime": 178,
+      "uptime30d": 100.00,
       "httpCode": 200
     },
     {
@@ -25,26 +25,26 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 0,
-      "uptime30d": 99.8,
+      "responseTime": 164,
+      "uptime30d": 100.00,
       "httpCode": 200
     },
     {
       "name": "civilengineer.la",
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
-      "status": "operational",
+      "status": "down",
       "responseTime": 0,
-      "uptime30d": 100,
-      "httpCode": 200
+      "uptime30d": 0,
+      "httpCode": 422
     },
     {
       "name": "bw.engineering",
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 0,
-      "uptime30d": 100,
+      "responseTime": 224,
+      "uptime30d": 100.00,
       "httpCode": 200
     },
     {
@@ -52,8 +52,8 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 0,
-      "uptime30d": 100,
+      "responseTime": 215,
+      "uptime30d": 100.00,
       "httpCode": 200
     }
   ],
