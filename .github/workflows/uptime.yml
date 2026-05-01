@@ -131,8 +131,12 @@ jobs:
           }
           JSONEOF
 
-      - name: Commit status update
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Update status - $(date)"
-          skip_dirty_check: false
+- name: Commit status update
+        run: |
+          git add -A
+          if ! git diff --cached --quiet --exit-code; then
+            git commit -m "Update status - $(date)"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/bwengr/bwengr-status.git HEAD:main || echo "Push failed"
+          else
+            echo "No changes to commit"
+          fi
