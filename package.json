@@ -9,11 +9,24 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "lint": "eslint src && astro check",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "astro": "^6.2.1",
     "@astrojs/sitemap": "^3.7.2",
-    "@tailwindcss/vite": "^4.2.4"
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.2.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@typescript-eslint/parser": "^8.59.1",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.7.0",
+    "prettier": "^3.8.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.59.1"
   }
 }

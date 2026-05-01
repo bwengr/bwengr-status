@@ -57,5 +57,5 @@
       "httpCode": 200
     }
   ],
-  "incidents": []
+  "incidents": null
 }

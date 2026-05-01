@@ -5,24 +5,6 @@ interface Props {
 }
 
 const { title, description = "Real-time infrastructure status for B+W Engineering web services." } = Astro.props;
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": title,
-  "description": description,
-  "url": "https://status.bwengr.com",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "B+W Engineering and Design",
-    "url": "https://bwengr.com"
-  },
-  "about": {
-    "@type": "Organization",
-    "name": "B+W Engineering and Design",
-    "url": "https://bwengr.com"
-  }
-};
 ---
 
 <!doctype html>
