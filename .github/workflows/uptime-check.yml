@@ -235,7 +235,7 @@ jobs:
               },
               {
                 "name": "api.bwengr.com",
-                "url": "https://api.bwengr.com",
+                "url": "https://api.bwengr.com/health",
                 "description": "AI search API for B+W Engineering",
                 "status": "$API_STATUS",
                 "responseTime": $RT_api,
