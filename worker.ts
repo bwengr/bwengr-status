@@ -1,4 +1,8 @@
 export default {
+  async fetch(_request: Request, env: { GITHUB_TOKEN: string }, _ctx: ExecutionContext): Promise<Response> {
+    return new Response('Worker is running. Scheduled triggers are enabled.', { status: 200 });
+  },
+
   async scheduled(event: ScheduledEvent, env: { GITHUB_TOKEN: string }, _ctx: ExecutionContext) {
     const GITHUB_TOKEN = env.GITHUB_TOKEN;
     const OWNER = 'bwengr';
@@ -14,7 +18,8 @@ export default {
           'Authorization': `Bearer ${GITHUB_TOKEN}`,
           'Accept': 'application/vnd.github+json',
           'X-GitHub-Api-Version': '2022-11-28',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'User-Agent': 'bwengr-status-worker/1.0'
         },
         body: JSON.stringify({
           ref: 'main'
