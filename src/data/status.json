@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-05-02T10:31:03+00:00",
-  "lastUpdated": "2026-05-02T10:31:03+00:00",
+  "lastChecked": "2026-05-02T10:36:01+00:00",
+  "lastUpdated": "2026-05-02T10:36:01+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 240,
+      "responseTime": 239,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 186,
+      "responseTime": 187,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 620,
+      "responseTime": 618,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 248,
+      "responseTime": 247,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -62,7 +62,7 @@
       "description": "AI search API for B+W Engineering",
       "status": "operational",
       "responseTime": 104,
-      "uptime30d": 95.00,
+      "uptime30d": 96.00,
       "httpCode": 200
     }
   ],
