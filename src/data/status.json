@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-05-04T19:41:31+00:00",
-  "lastUpdated": "2026-05-04T19:41:31+00:00",
+  "lastChecked": "2026-05-04T19:46:16+00:00",
+  "lastUpdated": "2026-05-04T19:46:16+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 192,
+      "responseTime": 191,
       "uptime30d": 100.00,
       "httpCode": 200
     },
