@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-05-06T09:41:13+00:00",
-  "lastUpdated": "2026-05-06T09:41:13+00:00",
+  "lastChecked": "2026-05-06T09:45:50+00:00",
+  "lastUpdated": "2026-05-06T09:45:50+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 256,
+      "responseTime": 255,
       "uptime30d": 100.00,
       "httpCode": 200
     },
