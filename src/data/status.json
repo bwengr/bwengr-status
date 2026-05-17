@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-05-17T13:01:04+00:00",
-  "lastUpdated": "2026-05-17T13:01:04+00:00",
+  "lastChecked": "2026-05-17T13:05:56+00:00",
+  "lastUpdated": "2026-05-17T13:05:56+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -36,7 +36,7 @@
       "status": "down",
       "responseTime": 567,
       "uptime30d": 95.00,
-      "httpCode": 422
+      "httpCode": 000
     },
     {
       "name": "bw.engineering",
