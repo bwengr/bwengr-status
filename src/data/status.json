@@ -1,15 +1,15 @@
 {
-  "lastChecked": "2026-05-30T14:42:06+00:00",
-  "lastUpdated": "2026-05-30T14:42:06+00:00",
+  "lastChecked": "2026-05-30T14:45:42+00:00",
+  "lastUpdated": "2026-05-30T14:45:42+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
-      "status": "operational",
+      "status": "down",
       "responseTime": 186,
-      "uptime30d": 100.00,
-      "httpCode": 200
+      "uptime30d": 99.00,
+      "httpCode": 000
     },
     {
       "name": "drainageplans.la",
