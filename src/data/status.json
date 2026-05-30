@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-05-30T13:25:41+00:00",
-  "lastUpdated": "2026-05-30T13:25:41+00:00",
+  "lastChecked": "2026-05-30T13:30:12+00:00",
+  "lastUpdated": "2026-05-30T13:30:12+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -51,10 +51,10 @@
       "name": "losangeles.engineering",
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
-      "status": "down",
+      "status": "operational",
       "responseTime": 226,
       "uptime30d": 99.00,
-      "httpCode": 301
+      "httpCode": 200
     },
     {
       "name": "api.bwengr.com",
