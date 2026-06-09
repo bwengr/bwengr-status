@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-06-09T21:05:13+00:00",
-  "lastUpdated": "2026-06-09T21:05:13+00:00",
+  "lastChecked": "2026-06-09T22:45:20+00:00",
+  "lastUpdated": "2026-06-09T22:45:20+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 182,
+      "responseTime": 183,
       "uptime30d": 99.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 229,
+      "responseTime": 228,
       "uptime30d": 100.00,
       "httpCode": 200
     },
