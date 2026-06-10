@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-06-10T15:26:43+00:00",
-  "lastUpdated": "2026-06-10T15:26:43+00:00",
+  "lastChecked": "2026-06-10T18:13:13+00:00",
+  "lastUpdated": "2026-06-10T18:13:13+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -61,7 +61,7 @@
       "url": "https://api.bwengr.com/health",
       "description": "AI search API for B+W Engineering",
       "status": "operational",
-      "responseTime": 107,
+      "responseTime": 106,
       "uptime30d": 100.00,
       "httpCode": 200
     }
