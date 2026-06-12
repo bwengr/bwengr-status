@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-06-11T23:07:49+00:00",
-  "lastUpdated": "2026-06-11T23:07:49+00:00",
+  "lastChecked": "2026-06-12T01:37:40+00:00",
+  "lastUpdated": "2026-06-12T01:37:40+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 181,
+      "responseTime": 180,
       "uptime30d": 99.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 591,
+      "responseTime": 588,
       "uptime30d": 96.00,
       "httpCode": 200
     },
