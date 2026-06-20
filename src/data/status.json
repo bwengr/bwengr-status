@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-06-20T15:10:55+00:00",
-  "lastUpdated": "2026-06-20T15:10:55+00:00",
+  "lastChecked": "2026-06-20T16:50:13+00:00",
+  "lastUpdated": "2026-06-20T16:50:13+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 213,
+      "responseTime": 214,
       "uptime30d": 99.00,
       "httpCode": 200
     },
