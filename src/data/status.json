@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-06-23T19:25:34+00:00",
-  "lastUpdated": "2026-06-23T19:25:34+00:00",
+  "lastChecked": "2026-06-23T21:13:29+00:00",
+  "lastUpdated": "2026-06-23T21:13:29+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 230,
+      "responseTime": 231,
       "uptime30d": 99.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 528,
+      "responseTime": 530,
       "uptime30d": 97.00,
       "httpCode": 200
     },
