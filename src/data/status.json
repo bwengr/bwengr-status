@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-07-07T06:17:11+00:00",
-  "lastUpdated": "2026-07-07T06:17:11+00:00",
+  "lastChecked": "2026-07-07T10:02:35+00:00",
+  "lastUpdated": "2026-07-07T10:02:35+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 314,
+      "responseTime": 315,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 205,
+      "responseTime": 206,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 550,
+      "responseTime": 549,
       "uptime30d": 99.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 285,
+      "responseTime": 281,
       "uptime30d": 99.00,
       "httpCode": 200
     },
