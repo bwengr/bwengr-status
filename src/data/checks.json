@@ -1,54 +1,5 @@
 [
   {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "bwengr.com",
-    "status": "operational",
-    "responseTime": 133,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "drainageplans.la",
-    "status": "operational",
-    "responseTime": 125,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "gradingplans.la",
-    "status": "operational",
-    "responseTime": 538,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "civilengineer.la",
-    "status": "operational",
-    "responseTime": 206,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "bw.engineering",
-    "status": "operational",
-    "responseTime": 147,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "losangeles.engineering",
-    "status": "operational",
-    "responseTime": 137,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-06-13T22:55:40+00:00",
-    "service": "api.bwengr.com",
-    "status": "operational",
-    "responseTime": 125,
-    "httpCode": 200
-  },
-  {
     "timestamp": "2026-06-14T00:03:48+00:00",
     "service": "bwengr.com",
     "status": "operational",
@@ -16510,6 +16461,55 @@
     "service": "api.bwengr.com",
     "status": "operational",
     "responseTime": 139,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "bwengr.com",
+    "status": "operational",
+    "responseTime": 214,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "drainageplans.la",
+    "status": "operational",
+    "responseTime": 375,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "gradingplans.la",
+    "status": "operational",
+    "responseTime": 249,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "civilengineer.la",
+    "status": "operational",
+    "responseTime": 562,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "bw.engineering",
+    "status": "operational",
+    "responseTime": 321,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "losangeles.engineering",
+    "status": "operational",
+    "responseTime": 465,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-07-13T23:13:31+00:00",
+    "service": "api.bwengr.com",
+    "status": "operational",
+    "responseTime": 136,
     "httpCode": 200
   }
 ]
