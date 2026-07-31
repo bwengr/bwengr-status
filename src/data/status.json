@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-07-31T01:18:45+00:00",
-  "lastUpdated": "2026-07-31T01:18:45+00:00",
+  "lastChecked": "2026-07-31T04:47:15+00:00",
+  "lastUpdated": "2026-07-31T04:47:15+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 292,
+      "responseTime": 291,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -61,7 +61,7 @@
       "url": "https://api.bwengr.com/health",
       "description": "AI search API for B+W Engineering",
       "status": "operational",
-      "responseTime": 110,
+      "responseTime": 111,
       "uptime30d": 100.00,
       "httpCode": 200
     }
