@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-08-16T16:55:46+00:00",
-  "lastUpdated": "2026-08-16T16:55:46+00:00",
+  "lastChecked": "2026-08-16T17:15:58+00:00",
+  "lastUpdated": "2026-08-16T17:15:58+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 197,
+      "responseTime": 196,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 428,
+      "responseTime": 427,
       "uptime30d": 99.00,
       "httpCode": 200
     },
