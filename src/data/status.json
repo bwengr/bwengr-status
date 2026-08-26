@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-08-26T12:17:30+00:00",
-  "lastUpdated": "2026-08-26T12:17:30+00:00",
+  "lastChecked": "2026-08-26T13:26:37+00:00",
+  "lastUpdated": "2026-08-26T13:26:37+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -8,7 +8,7 @@
       "description": "Main website and portfolio",
       "status": "down",
       "responseTime": 211,
-      "uptime30d": 99.00,
+      "uptime30d": 98.00,
       "httpCode": 000
     },
     {
@@ -44,7 +44,7 @@
       "description": "B+W Engineering short URL",
       "status": "down",
       "responseTime": 291,
-      "uptime30d": 99.00,
+      "uptime30d": 98.00,
       "httpCode": 301
     },
     {
@@ -53,7 +53,7 @@
       "description": "Los Angeles engineering redirect",
       "status": "down",
       "responseTime": 302,
-      "uptime30d": 99.00,
+      "uptime30d": 98.00,
       "httpCode": 301
     },
     {
