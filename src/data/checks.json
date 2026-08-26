@@ -1,54 +1,5 @@
 [
   {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "bwengr.com",
-    "status": "operational",
-    "responseTime": 156,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "drainageplans.la",
-    "status": "operational",
-    "responseTime": 145,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "gradingplans.la",
-    "status": "operational",
-    "responseTime": 145,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "civilengineer.la",
-    "status": "operational",
-    "responseTime": 187,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "bw.engineering",
-    "status": "operational",
-    "responseTime": 304,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "losangeles.engineering",
-    "status": "operational",
-    "responseTime": 267,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-07-27T17:49:18+00:00",
-    "service": "api.bwengr.com",
-    "status": "operational",
-    "responseTime": 95,
-    "httpCode": 200
-  },
-  {
     "timestamp": "2026-07-27T19:03:38+00:00",
     "service": "bwengr.com",
     "status": "operational",
@@ -42480,6 +42431,55 @@
     "service": "api.bwengr.com",
     "status": "down",
     "responseTime": 385,
+    "httpCode": 404
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "bwengr.com",
+    "status": "operational",
+    "responseTime": 126,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "drainageplans.la",
+    "status": "operational",
+    "responseTime": 376,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "gradingplans.la",
+    "status": "operational",
+    "responseTime": 152,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "civilengineer.la",
+    "status": "operational",
+    "responseTime": 249,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "bw.engineering",
+    "status": "operational",
+    "responseTime": 136,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "losangeles.engineering",
+    "status": "operational",
+    "responseTime": 191,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T18:22:06+00:00",
+    "service": "api.bwengr.com",
+    "status": "down",
+    "responseTime": 573,
     "httpCode": 404
   }
 ]

@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-08-26T16:38:52+00:00",
-  "lastUpdated": "2026-08-26T16:38:52+00:00",
+  "lastChecked": "2026-08-26T18:22:06+00:00",
+  "lastUpdated": "2026-08-26T18:22:06+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -62,7 +62,7 @@
       "description": "AI search API for B+W Engineering",
       "status": "down",
       "responseTime": 121,
-      "uptime30d": 98.00,
+      "uptime30d": 97.00,
       "httpCode": 404
     }
   ],
