@@ -42285,5 +42285,54 @@
     "status": "down",
     "responseTime": 104,
     "httpCode": 404
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "bwengr.com",
+    "status": "down",
+    "responseTime": 7,
+    "httpCode": 0
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "drainageplans.la",
+    "status": "operational",
+    "responseTime": 213,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "gradingplans.la",
+    "status": "operational",
+    "responseTime": 176,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "civilengineer.la",
+    "status": "down",
+    "responseTime": 286,
+    "httpCode": 301
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "bw.engineering",
+    "status": "down",
+    "responseTime": 91,
+    "httpCode": 301
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "losangeles.engineering",
+    "status": "down",
+    "responseTime": 91,
+    "httpCode": 301
+  },
+  {
+    "timestamp": "2026-08-26T11:45:42+00:00",
+    "service": "api.bwengr.com",
+    "status": "down",
+    "responseTime": 295,
+    "httpCode": 404
   }
 ]
