@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-08-28T12:39:57+00:00",
-  "lastUpdated": "2026-08-28T12:39:57+00:00",
+  "lastChecked": "2026-08-28T22:38:49+00:00",
+  "lastUpdated": "2026-08-28T22:38:49+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 211,
+      "responseTime": 210,
       "uptime30d": 98.00,
       "httpCode": 200
     },
@@ -61,7 +61,7 @@
       "url": "https://api.bwengr.com/openapi.json",
       "description": "DGX Sparks local LLM API (private inference gateway)",
       "status": "operational",
-      "responseTime": 120,
+      "responseTime": 121,
       "uptime30d": 97.00,
       "httpCode": 200
     }
