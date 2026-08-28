@@ -236,7 +236,7 @@ jobs:
               {
                 "name": "api.bwengr.com",
                 "url": "https://api.bwengr.com/openapi.json",
-                "description": "AI search API for B+W Engineering",
+                "description": "DGX Sparks local LLM API (private inference gateway)",
                 "status": "$API_STATUS",
                 "responseTime": $RT_api,
                 "uptime30d": $UP_api,

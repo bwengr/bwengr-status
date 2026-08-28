@@ -59,7 +59,7 @@
     {
       "name": "api.bwengr.com",
       "url": "https://api.bwengr.com/openapi.json",
-      "description": "AI search API for B+W Engineering",
+      "description": "DGX Sparks local LLM API (private inference gateway)",
       "status": "operational",
       "responseTime": 120,
       "uptime30d": 97.00,
