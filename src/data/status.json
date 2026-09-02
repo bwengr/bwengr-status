@@ -1,6 +1,6 @@
 {
-  "lastChecked": "2026-09-01T23:47:55+00:00",
-  "lastUpdated": "2026-09-01T23:47:55+00:00",
+  "lastChecked": "2026-09-02T01:27:46+00:00",
+  "lastUpdated": "2026-09-02T01:27:46+00:00",
   "services": [
     {
       "name": "bwengr.com",
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 302,
+      "responseTime": 303,
       "uptime30d": 98.00,
       "httpCode": 200
     },
@@ -61,7 +61,7 @@
       "url": "https://api.bwengr.com/openapi.json",
       "description": "DGX Sparks local LLM API (private inference gateway)",
       "status": "operational",
-      "responseTime": 127,
+      "responseTime": 128,
       "uptime30d": 97.00,
       "httpCode": 200
     }
