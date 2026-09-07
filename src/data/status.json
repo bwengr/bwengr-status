@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-09-07T21:47:56+00:00",
-  "lastUpdated": "2026-09-07T21:47:56+00:00",
+  "lastChecked": "2026-09-07T23:48:08+00:00",
+  "lastUpdated": "2026-09-07T23:48:08+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 210,
+      "responseTime": 209,
       "uptime30d": 98.00,
       "httpCode": 200
     },
@@ -52,7 +52,7 @@
       "url": "https://losangeles.engineering",
       "description": "Los Angeles engineering redirect",
       "status": "operational",
-      "responseTime": 304,
+      "responseTime": 303,
       "uptime30d": 98.00,
       "httpCode": 200
     },
