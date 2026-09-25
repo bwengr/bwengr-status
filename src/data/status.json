@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-09-25T18:47:17+00:00",
-  "lastUpdated": "2026-09-25T18:47:17+00:00",
+  "lastChecked": "2026-09-25T21:51:10+00:00",
+  "lastUpdated": "2026-09-25T21:51:10+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 242,
+      "responseTime": 241,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 709,
+      "responseTime": 708,
       "uptime30d": 94.00,
       "httpCode": 200
     },
@@ -43,7 +43,7 @@
       "url": "https://bw.engineering",
       "description": "B+W Engineering short URL",
       "status": "operational",
-      "responseTime": 301,
+      "responseTime": 299,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -61,8 +61,8 @@
       "url": "https://api.bwengr.com/openapi.json",
       "description": "DGX Sparks local LLM API (private inference gateway)",
       "status": "operational",
-      "responseTime": 714,
-      "uptime30d": 97.00,
+      "responseTime": 711,
+      "uptime30d": 98.00,
       "httpCode": 200
     }
   ],
