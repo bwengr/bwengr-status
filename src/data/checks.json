@@ -1,103 +1,5 @@
 [
   {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "bwengr.com",
-    "status": "operational",
-    "responseTime": 501,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "drainageplans.la",
-    "status": "operational",
-    "responseTime": 673,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "gradingplans.la",
-    "status": "operational",
-    "responseTime": 284,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "civilengineer.la",
-    "status": "operational",
-    "responseTime": 357,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "bw.engineering",
-    "status": "operational",
-    "responseTime": 224,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "losangeles.engineering",
-    "status": "operational",
-    "responseTime": 189,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T16:31:26+00:00",
-    "service": "api.bwengr.com",
-    "status": "operational",
-    "responseTime": 391,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "bwengr.com",
-    "status": "operational",
-    "responseTime": 199,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "drainageplans.la",
-    "status": "operational",
-    "responseTime": 382,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "gradingplans.la",
-    "status": "operational",
-    "responseTime": 475,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "civilengineer.la",
-    "status": "operational",
-    "responseTime": 538,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "bw.engineering",
-    "status": "operational",
-    "responseTime": 545,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "losangeles.engineering",
-    "status": "operational",
-    "responseTime": 1515,
-    "httpCode": 200
-  },
-  {
-    "timestamp": "2026-09-01T19:30:24+00:00",
-    "service": "api.bwengr.com",
-    "status": "operational",
-    "responseTime": 1035,
-    "httpCode": 200
-  },
-  {
     "timestamp": "2026-09-01T21:56:30+00:00",
     "service": "bwengr.com",
     "status": "operational",
@@ -9846,6 +9748,55 @@
     "service": "api.bwengr.com",
     "status": "operational",
     "responseTime": 246,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "bwengr.com",
+    "status": "operational",
+    "responseTime": 141,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "drainageplans.la",
+    "status": "operational",
+    "responseTime": 265,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "gradingplans.la",
+    "status": "operational",
+    "responseTime": 140,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "civilengineer.la",
+    "status": "operational",
+    "responseTime": 440,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "bw.engineering",
+    "status": "operational",
+    "responseTime": 239,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "losangeles.engineering",
+    "status": "operational",
+    "responseTime": 147,
+    "httpCode": 200
+  },
+  {
+    "timestamp": "2026-10-01T19:48:43+00:00",
+    "service": "api.bwengr.com",
+    "status": "operational",
+    "responseTime": 139,
     "httpCode": 200
   }
 ]
