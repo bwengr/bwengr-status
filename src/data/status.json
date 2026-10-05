@@ -1,13 +1,13 @@
 {
-  "lastChecked": "2026-10-04T21:24:16+00:00",
-  "lastUpdated": "2026-10-04T21:24:16+00:00",
+  "lastChecked": "2026-10-05T00:02:05+00:00",
+  "lastUpdated": "2026-10-05T00:02:05+00:00",
   "services": [
     {
       "name": "bwengr.com",
       "url": "https://bwengr.com",
       "description": "Main website and portfolio",
       "status": "operational",
-      "responseTime": 245,
+      "responseTime": 242,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -16,7 +16,7 @@
       "url": "https://drainageplans.la",
       "description": "Altadena fire rebuild drainage plan landing page",
       "status": "operational",
-      "responseTime": 273,
+      "responseTime": 272,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -25,7 +25,7 @@
       "url": "https://gradingplans.la",
       "description": "Los Angeles grading plans landing page",
       "status": "operational",
-      "responseTime": 247,
+      "responseTime": 245,
       "uptime30d": 100.00,
       "httpCode": 200
     },
@@ -34,7 +34,7 @@
       "url": "https://civilengineer.la",
       "description": "Civil engineer LA redirect service",
       "status": "operational",
-      "responseTime": 680,
+      "responseTime": 682,
       "uptime30d": 96.00,
       "httpCode": 200
     },
@@ -61,7 +61,7 @@
       "url": "https://api.bwengr.com/openapi.json",
       "description": "DGX Sparks local LLM API (private inference gateway)",
       "status": "operational",
-      "responseTime": 702,
+      "responseTime": 704,
       "uptime30d": 98.00,
       "httpCode": 200
     }
