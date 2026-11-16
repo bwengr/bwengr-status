@@ -456,13 +456,13 @@ import Layout from '../layouts/Layout.astro';
     ['requests', 'tokens', 'peak', 'util', 'energy', 'uptime'].forEach((k) => set(k, '--'));
   }
 
-  function stamp(iso: unknown) {
+  function stamp(iso: unknown, withYear = false) {
     if (typeof iso !== 'string') return '';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return '';
-    return d.toLocaleString(undefined, {
-      month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-    });
+    return d.toLocaleString(undefined, withYear
+      ? { year: 'numeric', month: 'short', day: 'numeric' }
+      : { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   }
 
   async function loadWindow(w: string) {
@@ -482,7 +482,8 @@ import Layout from '../layouts/Layout.astro';
       set('util', dec(tp.avg_gpu_util_pct, 0));
       set('energy', dec(pw.energy_kwh, 2));
       set('uptime', dec(cl.uptime_pct, 1));
-      const from = stamp(d.window_start), to = stamp(d.generated_at);
+      const span = w === '12mo';
+      const from = stamp(d.window_start, span), to = stamp(d.generated_at, span);
       meta.textContent = `${from} → ${to} · ${num(cl.samples)} samples`;
     } catch (err) {
       meta.textContent = 'history unavailable';
