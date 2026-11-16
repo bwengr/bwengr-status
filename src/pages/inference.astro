@@ -1,0 +1,378 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="AI Inference Cluster Status | B+W Engineering"
+  description="Live health, thermals, and throughput for the B+W Engineering DGX Spark inference cluster."
+>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content" class="wrap">
+    <div class="toprow">
+      <a class="back" href="/">Back to system status</a>
+    </div>
+
+    <header class="head">
+      <span id="pill" class="pill pill-idle" role="status" aria-live="polite">checking cluster</span>
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <rect x="4" y="4" width="16" height="5" rx="1.6" />
+          <rect x="4" y="11" width="16" height="5" rx="1.6" />
+          <path d="M7 20h10" />
+        </svg>
+      </span>
+      <h1>B+W Inference</h1>
+      <span class="brandsub">DGX cluster</span>
+    </header>
+    <p class="lede">Read-only view of the two DGX Spark nodes behind <code>api.bwengr.com</code>. No keys, no prompts, no usage detail.</p>
+
+    <section class="grid4" aria-label="Cluster summary">
+      <div class="stat">
+        <div class="lbl">Cluster throughput</div>
+        <div class="big"><span id="decode">0.0</span><span class="unit">tok/s</span></div>
+        <div class="cap">decode rate</div>
+      </div>
+      <div class="stat">
+        <div class="lbl">Active requests</div>
+        <div class="big" id="active">0</div>
+        <div class="cap" id="activecap">0 running · 0 queued</div>
+      </div>
+      <div class="stat">
+        <div class="lbl">Nodes online</div>
+        <div class="big"><span id="nodeson">0</span><span class="unit" id="nodesexp">/ 2</span></div>
+        <div class="cap">expected cluster members</div>
+      </div>
+      <div class="stat">
+        <div class="lbl">Hottest GPU</div>
+        <div class="big"><span id="hottest">--</span><span class="unit">°C</span></div>
+        <div class="bar"><i id="hotbar" data-f="hotbar" style="width:0%"></i></div>
+        <div class="cap" id="hotcap">waiting for telemetry</div>
+      </div>
+    </section>
+
+    <h2 class="sechead">Nodes</h2>
+    <section class="grid2" id="nodes" aria-label="Cluster nodes">
+      <article class="node" data-node="0">
+        <div class="nodehead">
+          <div>
+            <div class="nodetitle">Node A</div>
+            <div class="nodesub" data-role="sub">offline</div>
+          </div>
+          <span class="dot" data-role="dot">unknown</span>
+        </div>
+        <div class="minigrid">
+          <div class="mini"><div class="lbl">Temp</div><div class="mv"><span data-f="temp">--</span><span class="u">°C</span></div><div class="bar"><i data-f="tempbar" style="width:0%"></i></div></div>
+          <div class="mini"><div class="lbl">GPU util</div><div class="mv"><span data-f="util">--</span><span class="u">%</span></div><div class="bar"><i data-f="utilbar" style="width:0%"></i></div></div>
+          <div class="mini"><div class="lbl">Power</div><div class="mv"><span data-f="power">--</span><span class="u">W</span></div><div class="bar"><i data-f="powerbar" style="width:0%"></i></div></div>
+          <div class="mini"><div class="lbl">GPU mem</div><div class="mv"><span data-f="mem">--</span><span class="u">GiB</span></div><div class="bar"><i data-f="membar" style="width:0%"></i></div></div>
+        </div>
+        <div class="ringwrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="46" class="ringbg" />
+            <circle cx="60" cy="60" r="46" class="ringfg" data-f="ring" stroke-dasharray="289" stroke-dashoffset="289" />
+          </svg>
+          <div class="ringtxt"><span data-f="ringtemp">--</span><span class="u">°C</span></div>
+        </div>
+      </article>
+
+      <article class="node" data-node="1">
+        <div class="nodehead">
+          <div>
+            <div class="nodetitle">Node B</div>
+            <div class="nodesub" data-role="sub">offline</div>
+          </div>
+          <span class="dot" data-role="dot">unknown</span>
+        </div>
+        <div class="minigrid">
+          <div class="mini"><div class="lbl">Temp</div><div class="mv"><span data-f="temp">--</span><span class="u">°C</span></div><div class="bar"><i data-f="tempbar" style="width:0%"></i></div></div>
+          <div class="mini"><div class="lbl">GPU util</div><div class="mv"><span data-f="util">--</span><span class="u">%</span></div><div class="bar"><i data-f="utilbar" style="width:0%"></i></div></div>
+          <div class="mini"><div class="lbl">Power</div><div class="mv"><span data-f="power">--</span><span class="u">W</span></div><div class="bar"><i data-f="powerbar" style="width:0%"></i></div></div>
+          <div class="mini"><div class="lbl">GPU mem</div><div class="mv"><span data-f="mem">--</span><span class="u">GiB</span></div><div class="bar"><i data-f="membar" style="width:0%"></i></div></div>
+        </div>
+        <div class="ringwrap">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="46" class="ringbg" />
+            <circle cx="60" cy="60" r="46" class="ringfg" data-f="ring" stroke-dasharray="289" stroke-dashoffset="289" />
+          </svg>
+          <div class="ringtxt"><span data-f="ringtemp">--</span><span class="u">°C</span></div>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="sechead">Throughput · last few minutes</h2>
+    <section class="chartcard" aria-label="Decode tokens per second over time">
+      <div class="charthead">
+        <div>
+          <div class="lbl">Decode tokens / sec</div>
+          <div class="big"><span id="chartnow">0.0</span><span class="unit">tok/s</span></div>
+        </div>
+        <div class="chartmeta" id="chartmeta">collecting samples</div>
+      </div>
+      <div class="chartbody">
+        <svg id="chart" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28" />
+              <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g class="grid" aria-hidden="true">
+            <line x1="0" y1="60" x2="1000" y2="60" />
+            <line x1="0" y1="120" x2="1000" y2="120" />
+            <line x1="0" y1="180" x2="1000" y2="180" />
+            <line x1="0" y1="239" x2="1000" y2="239" />
+          </g>
+          <path id="area" fill="url(#fill)" d="" />
+          <path id="line" fill="none" stroke="#2dd4bf" stroke-width="2" d="" />
+        </svg>
+      </div>
+      <p class="chartnote">Held in memory only · cleared when you close this tab</p>
+    </section>
+
+    <p class="foot">Served by <a href="https://api.bwengr.com/status" target="_blank" rel="noopener">api.bwengr.com/status</a> · part of <a href="https://bwengr.com" target="_blank" rel="noopener">B+W Engineering and Design</a></p>
+  </main>
+</Layout>
+
+<style>
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 100;
+    background: #2dd4bf; color: #04120f; padding: 10px 16px; font-weight: 600; border-radius: 8px;
+  }
+  .skip-link:focus { left: 16px; top: 16px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 56px; }
+  .toprow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+  .back { color: #8b9bb0; text-decoration: none; font-size: 13px; letter-spacing: 0.02em; }
+  .back:hover { color: #2dd4bf; }
+  .pill { font-size: 12px; padding: 6px 12px; border-radius: 999px; border: 1px solid #1e2a36; white-space: nowrap; }
+  .pill-ok { color: #34d399; border-color: #14503c; background: rgba(52,211,153,0.08); }
+  .pill-warn { color: #fbbf24; border-color: #5a4413; background: rgba(251,191,36,0.08); }
+  .pill-bad { color: #f87171; border-color: #5a1f1f; background: rgba(248,113,113,0.08); }
+  .pill-idle { color: #8b9bb0; }
+  .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .glyph { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; color: #2dd4bf; background: rgba(45,212,191,0.08); border: 1px solid #16333a; }
+  .head h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .brandsub { color: #7d8b9d; font-size: 15px; font-weight: 500; }
+  .lede { color: #8b9bb0; font-size: 14px; margin: 10px 0 28px; max-width: 760px; }
+  .lede code { color: #2dd4bf; font-size: 13px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .stat, .node, .chartcard {
+    background: linear-gradient(180deg, #0e1620 0%, #0b121a 100%);
+    border: 1px solid #1a2733; border-radius: 14px; padding: 18px 18px 16px;
+  }
+  .lbl { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #6f8092; font-weight: 600; }
+  .big { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; margin-top: 10px; color: #f1f5f9; font-variant-numeric: tabular-nums; }
+  .big .unit { font-size: 14px; font-weight: 500; color: #7d8b9d; margin-left: 6px; }
+  .cap { font-size: 12px; color: #6f8092; margin-top: 10px; }
+  .bar { height: 5px; border-radius: 3px; background: #16212c; margin-top: 12px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: #2dd4bf; border-radius: 3px; transition: width 400ms ease; }
+  .sechead { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #7d8b9d; font-weight: 700; margin: 34px 0 12px; }
+  .nodehead { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .nodetitle { font-size: 16px; font-weight: 700; letter-spacing: 0.01em; }
+  .nodesub { font-size: 12px; color: #6f8092; margin-top: 3px; }
+  .dot { font-size: 11px; padding: 4px 10px; border-radius: 999px; border: 1px solid #1e2a36; color: #8b9bb0; }
+  .dot-ok { color: #34d399; border-color: #14503c; background: rgba(52,211,153,0.08); }
+  .dot-bad { color: #f87171; border-color: #5a1f1f; background: rgba(248,113,113,0.08); }
+  .minigrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+  .mini { background: #0b131b; border: 1px solid #16212c; border-radius: 10px; padding: 12px 12px 10px; }
+  .mv { font-size: 20px; font-weight: 700; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .mv .u { font-size: 11px; font-weight: 500; color: #7d8b9d; margin-left: 4px; }
+  .mini .bar { margin-top: 9px; }
+  .ringwrap { position: relative; width: 116px; height: 116px; margin: 14px auto 0; }
+  .ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ringbg { fill: none; stroke: #16212c; stroke-width: 8; }
+  .ringfg { fill: none; stroke: #2dd4bf; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 500ms ease; }
+  .ringtxt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ringtxt .u { font-size: 10px; color: #7d8b9d; margin-left: 2px; }
+  .chartcard { margin-top: 4px; }
+  .charthead { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .chartmeta { font-size: 12px; color: #6f8092; }
+  .chartbody { margin-top: 18px; height: 220px; }
+  #chart { width: 100%; height: 100%; display: block; }
+  .chartnote { font-size: 11.5px; color: #5b6b7d; margin-top: 10px; }
+  .foot { font-size: 12.5px; color: #5b6b7d; margin-top: 32px; }
+  .foot a { color: #8b9bb0; text-decoration: none; border-bottom: 1px solid #1e2a36; }
+  .foot a:hover { color: #2dd4bf; border-color: #2dd4bf; }
+  @media (max-width: 900px) {
+    .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .grid4 { grid-template-columns: 1fr; }
+    .head h1 { font-size: 21px; }
+    .big { font-size: 28px; }
+  }
+
+  /* node layout: metrics left, thermal ring right */
+  .node {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 118px;
+    grid-template-areas: "head head" "mini ring";
+    gap: 14px 16px;
+    align-items: center;
+  }
+  .nodehead { grid-area: head; }
+  .minigrid { grid-area: mini; margin-top: 0; }
+  .ringwrap { grid-area: ring; margin: 0; justify-self: center; align-self: center; }
+
+  /* chart */
+  .grid line {
+    stroke: rgba(148, 163, 184, 0.14);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  #area { opacity: .34; }
+  #line { filter: drop-shadow(0 0 6px rgba(45, 212, 191, 0.55)); }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .head .pill {
+    order: 2;
+    margin-left: auto;
+  }
+  .glyph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(45, 212, 191, 0.12);
+    border: 1px solid rgba(45, 212, 191, 0.25);
+    color: #2dd4bf;
+  }
+</style>
+
+<script>
+  const ENDPOINT = 'https://api.bwengr.com/status';
+  const POLL_MS = 5000;
+  const MAX_SAMPLES = 150;
+
+  const samples: number[] = [];
+  const nodes = Array.from(document.querySelectorAll('.node'));
+  const pill = document.getElementById('pill')!;
+  const decodeEl = document.getElementById('decode')!;
+  const chartNow = document.getElementById('chartnow')!;
+  const chartMeta = document.getElementById('chartmeta')!;
+  const line = document.getElementById('line') as unknown as SVGPathElement;
+  const area = document.getElementById('area') as unknown as SVGPathElement;
+
+  const fmt = (v: unknown, d = 1) =>
+    typeof v === 'number' && Number.isFinite(v) ? v.toFixed(d) : '--';
+
+  function setPill(kind: 'ok' | 'warn' | 'bad' | 'idle', text: string) {
+    pill.className = 'pill pill-' + kind;
+    pill.textContent = text;
+  }
+
+  function setBar(root: ParentNode, sel: string, pct: number) {
+    const el = root.querySelector(`[data-f="${sel}"]`) as HTMLElement | null;
+    if (!el) return;
+    const safe = Number.isFinite(pct) ? pct : 0;
+    el.style.width = Math.max(0, Math.min(100, safe)) + '%';
+  }
+
+  function paintNode(card: Element, node: any) {
+    const q = (sel: string) => card.querySelector(`[data-f="${sel}"]`) as HTMLElement | null;
+    const online = !!node.online;
+    const sub = card.querySelector('[data-role="sub"]') as HTMLElement | null;
+    const dot = card.querySelector('[data-role="dot"]') as HTMLElement | null;
+    if (sub) sub.textContent = online ? `online · ${node.gpu || 'GB10'}` : 'offline';
+    if (dot) {
+      dot.textContent = online ? 'healthy' : 'offline';
+      dot.className = 'dot ' + (online ? 'dot-ok' : 'dot-bad');
+    }
+
+    const temp = node.temp_c;
+    const util = node.gpu_util_pct;
+    const power = node.power_w;
+    const mem = node.mem_used_gib;
+    const memTotal = node.mem_total_gib || 121.6;
+
+    const t = q('temp'); if (t) t.textContent = fmt(temp, 0);
+    const u = q('util'); if (u) u.textContent = fmt(util, 0);
+    const p = q('power'); if (p) p.textContent = fmt(power, 1);
+    const m = q('mem'); if (m) m.textContent = fmt(mem, 1);
+    const rt = q('ringtemp'); if (rt) rt.textContent = fmt(temp, 0);
+
+    setBar(card, 'tempbar', typeof temp === 'number' ? temp : 0);
+    setBar(card, 'utilbar', typeof util === 'number' ? util : 0);
+    setBar(card, 'powerbar', typeof power === 'number' ? (power / 140) * 100 : 0);
+    setBar(card, 'membar', typeof mem === 'number' ? (mem / memTotal) * 100 : 0);
+
+    const ring = q('ring');
+    if (ring) {
+      const circ = 289;
+      const frac = typeof temp === 'number' ? Math.max(0, Math.min(1, temp / 100)) : 0;
+      ring.setAttribute('stroke-dashoffset', String(circ - circ * frac));
+    }
+  }
+
+  function paintChart() {
+    const w = 1000, h = 240, pad = 6;
+    const peak = Math.max(1, ...samples);
+    const max = Math.max(5, peak * 1.45);
+    const n = samples.length;
+    if (!n) { line.setAttribute('d', ''); area.setAttribute('d', ''); return; }
+    const pts = samples.map((v, i) => {
+      const x = n === 1 ? w : (i / (n - 1)) * w;
+      const y = h - pad - (v / max) * (h - pad * 2);
+      return [x, y] as const;
+    });
+    const d = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+    line.setAttribute('d', d);
+    const first = pts[0], last = pts[pts.length - 1];
+    area.setAttribute('d', `${d} L${last[0].toFixed(1)},${h} L${first[0].toFixed(1)},${h} Z`);
+    chartMeta.textContent = `peak ${max.toFixed(1)} tok/s · ${n} samples`;
+  }
+
+  async function tick() {
+    try {
+      const res = await fetch(ENDPOINT, { cache: 'no-store' });
+      const data = await res.json();
+      if (!data.ok) {
+        setPill('bad', 'cluster unreachable');
+        return;
+      }
+      const c = data.cluster || {};
+      const hot = c.hottest_gpu_celsius;
+
+      decodeEl.textContent = fmt(c.decode_tokens_per_second, 1);
+      chartNow.textContent = fmt(c.decode_tokens_per_second, 1);
+      const running = c.requests_running || 0;
+      const queued = c.requests_waiting || 0;
+      (document.getElementById('active') as HTMLElement).textContent = String(running + queued);
+      (document.getElementById('activecap') as HTMLElement).textContent =
+        `${running} running · ${queued} queued`;
+      (document.getElementById('nodeson') as HTMLElement).textContent = String(c.nodes_online ?? 0);
+      (document.getElementById('nodesexp') as HTMLElement).textContent =
+        `/ ${c.nodes_expected ?? 2}`;
+      (document.getElementById('hottest') as HTMLElement).textContent = fmt(hot, 0);
+      setBar(document, 'hotbar', typeof hot === 'number' ? hot : 0);
+      (document.getElementById('hotcap') as HTMLElement).textContent =
+        typeof hot === 'number' && hot < 70 ? 'thermal headroom ok' : 'running warm';
+
+      const healthy = (c.nodes_online ?? 0) >= (c.nodes_expected ?? 2) &&
+                      typeof hot === 'number' && hot < 80;
+      setPill(healthy ? 'ok' : 'warn', healthy ? 'all quiet · healthy' : 'attention · degraded');
+
+      (data.nodes || []).forEach((node: any, i: number) => {
+        if (nodes[i]) paintNode(nodes[i], node);
+      });
+
+      samples.push(Number(c.decode_tokens_per_second) || 0);
+      while (samples.length > MAX_SAMPLES) samples.shift();
+      paintChart();
+    } catch (err) {
+      setPill('bad', 'cluster unreachable');
+    }
+  }
+
+  tick();
+  setInterval(tick, POLL_MS);
+</script>
