@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
   title="AI Inference Cluster Status | B+W Engineering"
   description="Live health, thermals, and throughput for the B+W Engineering DGX Spark inference cluster."
   ogImage="/og/inference.png"
-  ogImageAlt="B+W Inference share card showing two DGX Spark nodes online, 140 tokens per second decode, and 68 degrees Celsius hottest GPU"
+  ogImageAlt="B+W Inference share card showing cluster health, decode throughput, and GPU temperatures"
   path="/inference/"
 >
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
       <h1>B+W Inference</h1>
       <span class="brandsub">DGX cluster</span>
     </header>
-    <p class="lede">Read-only view of the two DGX Spark nodes behind <code>api.bwengr.com</code>. Live hardware telemetry plus long-term aggregates out to 36 months. No keys, no prompts, no usage detail.</p>
+    <p class="lede">Live performance and hardware health for the B+W Engineering inference cluster.</p>
 
     <section class="grid4" aria-label="Cluster summary">
       <div class="stat">
@@ -153,10 +153,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="hstat"><div class="lbl">Uptime</div><div class="hv"><span data-h="uptime">--</span><span class="u">%</span></div></div>
       </div>
       <div class="life" id="life">Lifetime totals unavailable right now.</div>
-      <p class="chartnote">Anonymous counters only: request counts, token counts, and hardware telemetry. No prompts, completions, API keys, or key names are stored. Hourly aggregates are kept for 400 days and daily aggregates indefinitely, so the 36 month window stays available.</p>
+      <p class="chartnote">Aggregate telemetry only. Hourly figures are retained for 400 days and daily figures indefinitely.</p>
     </section>
 
-    <p class="foot">Served by <a href="https://api.bwengr.com/status" target="_blank" rel="noopener">api.bwengr.com/status</a> · part of <a href="https://bwengr.com" target="_blank" rel="noopener">B+W Engineering and Design</a></p>
+    <p class="foot">Part of <a href="https://bwengr.com" target="_blank" rel="noopener">B+W Engineering and Design</a></p>
   </main>
 </Layout>
 

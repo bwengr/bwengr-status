@@ -95,8 +95,8 @@ def main():
         title="B+W Inference",
         sub="DGX cluster \u00b7 live status",
         lede=[
-            "Two DGX Spark nodes behind api.bwengr.com.",
-            "GPU thermals, power, memory, and decode throughput.",
+            "Live health and performance for the",
+            "B+W Engineering inference cluster.",
         ],
         chips=[("nodes", "2 / 2 online"), ("throughput", "140 tok/s"), ("hottest gpu", "68 \u00b0C")],
         path="status.bwengr.com/inference",
