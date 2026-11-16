@@ -44,7 +44,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="stat">
         <div class="lbl">Nodes online</div>
         <div class="big"><span id="nodeson">0</span><span class="unit" id="nodesexp">/ 2</span></div>
-        <div class="cap">expected cluster members</div>
+        <div class="cap">nodes expected</div>
       </div>
       <div class="stat">
         <div class="lbl">Hottest GPU</div>
@@ -504,8 +504,6 @@ import Layout from '../layouts/Layout.astro';
         else if (d.days_tracked * 24 >= 1) days = plural(Math.round(d.days_tracked * 24), 'hour');
         else days = plural(Math.max(1, Math.round(d.days_tracked * 1440)), 'minute');
       }
-      const models = (l.models || []).map((m: any) => m.model).filter(Boolean);
-      const modelTxt = models.length ? models[0] : 'the cluster model';
       life.innerHTML =
         `Tracking since <b>${since || 'today'}</b> · <b>${days}</b> tracked · ` +
         `<b>${num(l.requests)}</b> requests · <b>${compact(l.total_tokens)}</b> tokens · ` +
