@@ -509,7 +509,7 @@ import Layout from '../layouts/Layout.astro';
       life.innerHTML =
         `Tracking since <b>${since || 'today'}</b> · <b>${days}</b> tracked · ` +
         `<b>${num(l.requests)}</b> requests · <b>${compact(l.total_tokens)}</b> tokens · ` +
-        `peak <b>${dec(l.peak_decode_tps, 1)}</b> tok/s · model <b>${modelTxt}</b>`;
+        `peak <b>${dec(l.peak_decode_tps, 1)}</b> tok/s`;
     } catch (err) {
       life.textContent = 'Lifetime totals unavailable right now.';
     }
