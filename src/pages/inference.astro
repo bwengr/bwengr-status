@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
       <h1>B+W Inference</h1>
       <span class="brandsub">DGX cluster</span>
     </header>
-    <p class="lede">Read-only view of the two DGX Spark nodes behind <code>api.bwengr.com</code>. No keys, no prompts, no usage detail.</p>
+    <p class="lede">Read-only view of the two DGX Spark nodes behind <code>api.bwengr.com</code>. Live hardware telemetry plus long-term aggregates out to 36 months. No keys, no prompts, no usage detail.</p>
 
     <section class="grid4" aria-label="Cluster summary">
       <div class="stat">
@@ -131,6 +131,29 @@ import Layout from '../layouts/Layout.astro';
         </svg>
       </div>
       <p class="chartnote">Held in memory only · cleared when you close this tab</p>
+    </section>
+
+    <h2 class="sechead">Cluster history</h2>
+    <section class="histcard" aria-label="Cluster history by time window">
+      <div class="histhead">
+        <div class="tabs" role="tablist" aria-label="History window">
+          <button class="tab is-on" role="tab" aria-selected="true" data-w="24h">24 hours</button>
+          <button class="tab" role="tab" aria-selected="false" data-w="7d">7 days</button>
+          <button class="tab" role="tab" aria-selected="false" data-w="30d">30 days</button>
+          <button class="tab" role="tab" aria-selected="false" data-w="36mo">36 months</button>
+        </div>
+        <div class="histmeta" id="histmeta">loading</div>
+      </div>
+      <div class="histgrid" id="histgrid">
+        <div class="hstat"><div class="lbl">Requests</div><div class="hv" data-h="requests">--</div></div>
+        <div class="hstat"><div class="lbl">Tokens generated</div><div class="hv" data-h="tokens">--</div></div>
+        <div class="hstat"><div class="lbl">Peak decode</div><div class="hv"><span data-h="peak">--</span><span class="u">tok/s</span></div></div>
+        <div class="hstat"><div class="lbl">GPU load</div><div class="hv"><span data-h="util">--</span><span class="u">%</span></div></div>
+        <div class="hstat"><div class="lbl">Energy</div><div class="hv"><span data-h="energy">--</span><span class="u">kWh</span></div></div>
+        <div class="hstat"><div class="lbl">Uptime</div><div class="hv"><span data-h="uptime">--</span><span class="u">%</span></div></div>
+      </div>
+      <div class="life" id="life">Lifetime totals unavailable right now.</div>
+      <p class="chartnote">Anonymous counters only: request counts, token counts, and hardware telemetry. No prompts, completions, API keys, or key names are stored. Hourly aggregates are kept for 400 days and daily aggregates indefinitely, so the 36 month window stays available.</p>
     </section>
 
     <p class="foot">Served by <a href="https://api.bwengr.com/status" target="_blank" rel="noopener">api.bwengr.com/status</a> · part of <a href="https://bwengr.com" target="_blank" rel="noopener">B+W Engineering and Design</a></p>
@@ -249,6 +272,28 @@ import Layout from '../layouts/Layout.astro';
     border: 1px solid rgba(45, 212, 191, 0.25);
     color: #2dd4bf;
   }
+  .histcard {
+    background: linear-gradient(180deg, #0e1620 0%, #0b121a 100%);
+    border: 1px solid #1a2733; border-radius: 14px; padding: 18px;
+  }
+  .histhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tab {
+    font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+    color: #8b9bb0; background: #0b131b; border: 1px solid #1a2733;
+    border-radius: 8px; padding: 7px 12px;
+  }
+  .tab:hover { color: #d7e2ee; border-color: #27404d; }
+  .tab.is-on { color: #04120f; background: #2dd4bf; border-color: #2dd4bf; }
+  .histmeta { font-size: 11.5px; color: #6f8092; font-variant-numeric: tabular-nums; }
+  .histgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+  .hstat { background: #0b131b; border: 1px solid #16212c; border-radius: 10px; padding: 12px; }
+  .hv { font-size: 22px; font-weight: 700; margin-top: 8px; color: #f1f5f9; font-variant-numeric: tabular-nums; }
+  .hv .u { font-size: 11px; font-weight: 500; color: #7d8b9d; margin-left: 4px; }
+  .life { font-size: 12px; color: #8b9bb0; margin-top: 14px; }
+  .life b { color: #d7e2ee; font-weight: 600; }
+  @media (max-width: 720px) { .histgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 </style>
 
 <script>
@@ -378,4 +423,109 @@ import Layout from '../layouts/Layout.astro';
 
   tick();
   setInterval(tick, POLL_MS);
+</script>
+
+<script>
+  const STATS_ENDPOINT = 'https://api.bwengr.com/stats';
+  const HIGHLIGHTS_ENDPOINT = 'https://api.bwengr.com/stats/highlights';
+  const WIN_LABEL: Record<string, string> = {
+    '24h': '24 hours', '7d': '7 days', '30d': '30 days', '36mo': '36 months',
+  };
+
+  const num = (v: unknown) =>
+    typeof v === 'number' && Number.isFinite(v) ? new Intl.NumberFormat('en-US').format(Math.round(v)) : '--';
+  const compact = (v: unknown) => {
+    if (typeof v !== 'number' || !Number.isFinite(v)) return '--';
+    if (v >= 1e9) return (v / 1e9).toFixed(2) + 'B';
+    if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return (v / 1e3).toFixed(1) + 'K';
+    return String(Math.round(v));
+  };
+  const dec = (v: unknown, d = 1) =>
+    typeof v === 'number' && Number.isFinite(v) ? v.toFixed(d) : '--';
+
+  const grid = document.getElementById('histgrid')!;
+  const meta = document.getElementById('histmeta')!;
+  const life = document.getElementById('life')!;
+  const set = (key: string, text: string) => {
+    const el = grid.querySelector(`[data-h="${key}"]`);
+    if (el) el.textContent = text;
+  };
+
+  function clearGrid() {
+    ['requests', 'tokens', 'peak', 'util', 'energy', 'uptime'].forEach((k) => set(k, '--'));
+  }
+
+  function stamp(iso: unknown) {
+    if (typeof iso !== 'string') return '';
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.toLocaleString(undefined, {
+      month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+    });
+  }
+
+  async function loadWindow(w: string) {
+    clearGrid();
+    meta.textContent = 'loading ' + (WIN_LABEL[w] || w) + '…';
+    try {
+      const res = await fetch(`${STATS_ENDPOINT}?window=${encodeURIComponent(w)}`, { cache: 'no-store' });
+      const d = await res.json();
+      if (!d || d.ok === false) throw new Error('bad payload');
+      const r = d.requests || {};
+      const tp = d.throughput || {};
+      const cl = d.cluster || {};
+      const pw = d.power || {};
+      set('requests', num(r.total));
+      set('tokens', compact(r.total_tokens));
+      set('peak', dec(tp.peak_decode_tps, 1));
+      set('util', dec(tp.avg_gpu_util_pct, 0));
+      set('energy', dec(pw.energy_kwh, 2));
+      set('uptime', dec(cl.uptime_pct, 1));
+      const from = stamp(d.window_start), to = stamp(d.generated_at);
+      meta.textContent = `${from} → ${to} · ${num(cl.samples)} samples`;
+    } catch (err) {
+      meta.textContent = 'history unavailable';
+      set('requests', '--');
+    }
+  }
+
+  async function loadLifetime() {
+    try {
+      const res = await fetch(HIGHLIGHTS_ENDPOINT, { cache: 'no-store' });
+      const d = await res.json();
+      if (!d || d.ok === false) throw new Error('bad payload');
+      const l = d.lifetime || {};
+      const since = stamp(d.tracking_since);
+      const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? '' : 's'}`;
+      let days = '--';
+      if (typeof d.days_tracked === 'number') {
+        if (d.days_tracked >= 1) days = plural(Math.round(d.days_tracked * 10) / 10, 'day');
+        else if (d.days_tracked * 24 >= 1) days = plural(Math.round(d.days_tracked * 24), 'hour');
+        else days = plural(Math.max(1, Math.round(d.days_tracked * 1440)), 'minute');
+      }
+      const models = (l.models || []).map((m: any) => m.model).filter(Boolean);
+      const modelTxt = models.length ? models[0] : 'the cluster model';
+      life.innerHTML =
+        `Tracking since <b>${since || 'today'}</b> · <b>${days}</b> tracked · ` +
+        `<b>${num(l.requests)}</b> requests · <b>${compact(l.total_tokens)}</b> tokens · ` +
+        `peak <b>${dec(l.peak_decode_tps, 1)}</b> tok/s · model <b>${modelTxt}</b>`;
+    } catch (err) {
+      life.textContent = 'Lifetime totals unavailable right now.';
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach((b) => {
+        b.classList.toggle('is-on', b === btn);
+        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+      });
+      loadWindow(btn.dataset.w || '24h');
+    });
+  });
+
+  loadWindow('24h');
+  loadLifetime();
+  setInterval(loadLifetime, 120000);
 </script>
